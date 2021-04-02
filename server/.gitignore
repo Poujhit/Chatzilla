@@ -1,11 +1,15 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# package-lock.json is ignored in client as yarn.lock is already there.
-package-lock.json
-!server/package-lock.json
+# testing
+/coverage
+
+# production
+/build
 
 # misc
 .DS_Store
