@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => {
 		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
+		alignItems: 'center',
 	};
 	return createStyles({
 		Background: {
@@ -18,6 +19,11 @@ const useStyles = makeStyles((theme: Theme) => {
 			flexDirection: 'column',
 			alignItems: 'center',
 			justifyContent: 'center',
+		},
+		Image: {
+			height: '100px',
+			width: '95px',
+			marginTop: '10px',
 		},
 		Card: {
 			width: '60%',
@@ -37,10 +43,13 @@ const useStyles = makeStyles((theme: Theme) => {
 			color: 'white',
 			fontSize: '50px',
 			fontWeight: 'bold',
-			marginTop: '10%',
+			marginTop: '4%',
 		},
 		subTitle: {
 			fontFamily: 'Rubik, sans-serif',
+			fontSize: '20px',
+			color: 'white',
+			padding: '15px',
 		},
 	});
 });
