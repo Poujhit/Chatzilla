@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/Chennai-Sharks/Chat-App/issues"
   },
-  "homepage": "https://github.com/Chennai-Sharks/Chat-App#readme"
+  "homepage": "https://github.com/Chennai-Sharks/Chat-App#readme",
+  "dependencies": {}
 }
