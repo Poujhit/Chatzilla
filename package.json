@@ -17,5 +17,8 @@
     "url": "https://github.com/Chennai-Sharks/Chat-App/issues"
   },
   "homepage": "https://github.com/Chennai-Sharks/Chat-App#readme",
-  "dependencies": {}
+  "dependencies": {
+    "moment": "^2.29.1",
+    "socket.io": "^4.0.1"
+  }
 }
