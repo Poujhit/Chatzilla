@@ -3,7 +3,7 @@
 /.pnp
 .pnp.js
 
-# package-lock.json is ignored in client as yarn.lock is already there.
+# package-lock.json is ignored in client as yarn.lock is already there. 
 package-lock.json
 !server/package-lock.json
 
