@@ -1,8 +1,13 @@
 import create from 'zustand';
 
-const authStore = create((set)=>({
+type State={
+    isLogin:boolean;
+    setSignUp:(isSignUp:boolean)=>void;
+}
+
+const authStore = create<State>((set)=>({
     isLogin:true,
-    setSignUp:(isSignUp:boolean)=> set((state)=>({
+    setSignUp:(isSignUp)=> set((state)=>({
         ...state,
         isLogin:isSignUp
     }))
