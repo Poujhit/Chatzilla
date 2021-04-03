@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => {
 		Image: {
 			height: '100px',
 			width: '95px',
-			marginTop: '10px',
+			marginTop: '40px',
 		},
 		Card: {
 			width: '60%',
@@ -50,6 +50,24 @@ const useStyles = makeStyles((theme: Theme) => {
 			fontSize: '20px',
 			color: 'white',
 			padding: '15px',
+		},
+		TextFieldStyle: {
+			margin: '10px 20px',
+			backgroundColor: '#F6F3F3',
+		},
+		LoginorSignupButton: {
+			borderRadius: '20px',
+			backgroundColor: '#1D63DC',
+			color: 'white',
+			width: '40%',
+			marginTop: '15px',
+			height: '50px',
+			alignSelf: 'center',
+			'&:hover': {
+				color: 'black',
+				borderRadius: '20px',
+				border: '2px solid #1D63DC',
+			},
 		},
 	});
 });

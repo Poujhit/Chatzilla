@@ -11,6 +11,3 @@ const App: React.FC = (props) => {
 };
 
 export default App;
-// #179DD2
-// #439CEF
-//
