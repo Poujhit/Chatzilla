@@ -1,12 +1,21 @@
 import React from 'react';
-import './App.css';
-import AuthScreen from './containers/Auth/AuthScreen';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-const App: React.FC = (props) => {
+import AuthScreen from './containers/Auth/AuthScreen';
+import ChatScreen from './containers/chat/ChatScreen';
+import './App.css';
+
+const App: React.FC = (_) => {
 	return (
-		<div className='App'>
-			<AuthScreen />
-		</div>
+		<BrowserRouter>
+			<div className='App'>
+				<Switch>
+					<Route path='/chat-room:id' component={ChatScreen} />
+					<Route path='/' exact component={AuthScreen} />
+					<Redirect to='/' path='/' />
+				</Switch>
+			</div>
+		</BrowserRouter>
 	);
 };
 
