@@ -2,23 +2,49 @@ import React from 'react';
 
 import { Button, Card, TextField, Typography } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
+import HashLoader from 'react-spinners/HashLoader';
 import useStyles from './AuthScreenStyles';
+import { useHistory } from 'react-router-dom';
 
 import Logo from '../../images/logo.png';
 import authStore from '../../stores/AuthStore';
+import { useMutation } from 'react-query';
+import axios, { AxiosResponse } from 'axios';
+import print from '../../print';
 
-interface MySignInFormValues {
-	mailId: string;
+interface UserDataForm {
+	email: string;
 	password: string;
+}
+interface AuthServerResponse {
+	email: string;
+	localId: string;
 }
 
 const AuthScreen: React.FC = (props) => {
+	console.log(props);
 	const classes = useStyles();
+	const history = useHistory();
 
 	const isLogin = authStore((state) => state.isLogin);
 	const setSignUp = authStore((state) => state.setSignUp);
 
-	const initialSignInValues: MySignInFormValues = { mailId: '', password: '' };
+	const mutation = useMutation((newuser: UserDataForm) => {
+		if (isLogin) {
+			console.log('signin');
+			return axios.post(
+				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC02zYRkV5eNPqQ5qHW7rYWq3_koqSUUKs',
+				{ ...newuser, returnSecureToken: true }
+			);
+		}
+		console.log('signup');
+		return axios.post(
+			'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC02zYRkV5eNPqQ5qHW7rYWq3_koqSUUKs',
+			{ ...newuser, returnSecureToken: true }
+		);
+	});
+
+	const initialSignInValues: UserDataForm = { email: '', password: '' };
 
 	return (
 		<div className={classes.Background}>
@@ -49,8 +75,15 @@ const AuthScreen: React.FC = (props) => {
 					<Formik
 						initialValues={initialSignInValues}
 						onSubmit={(values, actions) => {
-							console.log({ values, actions });
-							alert(JSON.stringify(values, null, 2));
+							actions.setSubmitting(true);
+
+							mutation
+								.mutateAsync(values)
+								.then((response: AxiosResponse<AuthServerResponse>) => {
+									print(response.data.localId);
+									history.push(`/chat-room${response.data.localId}`);
+								});
+
 							actions.setSubmitting(false);
 						}}
 					>
@@ -68,7 +101,7 @@ const AuthScreen: React.FC = (props) => {
 									<Field
 										variant='outlined'
 										type='input'
-										name='mailId'
+										name='email'
 										fullWidth
 										label='Email'
 										as={TextField}
@@ -90,11 +123,20 @@ const AuthScreen: React.FC = (props) => {
 									className={classes.LoginorSignupButton}
 									type='submit'
 								>
-									submit
+									{mutation.isLoading ? (
+										<HashLoader
+											loading={mutation.isLoading}
+											size={35}
+											color='black'
+										/>
+									) : (
+										'submit'
+									)}
 								</Button>
 							</Form>
 						)}
 					</Formik>
+
 					<Button
 						style={{
 							marginBottom: '15px',
