@@ -81,7 +81,8 @@ const AuthScreen: React.FC = (props) => {
 								.mutateAsync(values)
 								.then((response: AxiosResponse<AuthServerResponse>) => {
 									print(response.data.localId);
-									history.push(`/chat-room${response.data.localId}`);
+									// after authentication go to the create chat room
+									history.push(`/create-chat-room${response.data.localId}`);
 								});
 
 							actions.setSubmitting(false);
