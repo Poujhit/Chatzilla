@@ -82,7 +82,7 @@ const AuthScreen: React.FC = (props) => {
 								.then((response: AxiosResponse<AuthServerResponse>) => {
 									print(response.data.localId);
 									// after authentication go to the create chat room
-									history.push(`/create-chat-room${response.data.localId}`);
+									history.push(`/create-chat-room-${response.data.localId}`);
 								});
 
 							actions.setSubmitting(false);
@@ -112,7 +112,7 @@ const AuthScreen: React.FC = (props) => {
 									<Field
 										variant='outlined'
 										autoFocus={true}
-										type='input'
+										type='password'
 										fullWidth
 										label='Password'
 										name='password'
