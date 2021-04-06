@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ChatScreen: React.FC = (props) => {
-	return null;
+	return <div>hello world</div>;
 };
 
 export default ChatScreen;

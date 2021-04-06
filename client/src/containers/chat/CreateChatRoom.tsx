@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import userDataStore from '../../stores/UserDataStore';
 import PopUpDialog from '../../components/Dialog';
+import roomDataStore from '../../stores/RoomDataStore';
 
 interface ChatRoom {
 	name: string;
@@ -16,6 +17,8 @@ const CreateChatRoomScreen: React.FC = (props) => {
 	const classes = useCreateChatRoomStyles();
 	const history = useHistory();
 	const [openDialog, setOpenDialog] = React.useState(false);
+	const userData = userDataStore((state) => state);
+	const roomData = roomDataStore((state) => state);
 
 	const DialogOpen = () => {
 		setOpenDialog(true);
@@ -30,8 +33,6 @@ const CreateChatRoomScreen: React.FC = (props) => {
 		room: '',
 	};
 
-	const userData = userDataStore((state) => state);
-
 	return (
 		<div className={classes.Background}>
 			<Card className={classes.Card} variant='elevation' raised>
@@ -40,14 +41,31 @@ const CreateChatRoomScreen: React.FC = (props) => {
 					Join or create a Room
 				</Typography>
 				<Formik
+					validateOnChange={true}
 					initialValues={initialValues}
 					onSubmit={(values, actions) => {
 						actions.setSubmitting(true);
-						if (!userData.isAuthenticated) DialogOpen();
-						actions.setSubmitting(false);
+						if (!userData.isAuthenticated) {
+							DialogOpen();
+							actions.setSubmitting(false);
+						} else {
+							roomData.setName(values.name);
+							roomData.setRoom(values.room);
+							actions.setSubmitting(false);
+							history.push(`/chat-room${values.room}`);
+						}
+					}}
+					validate={(values) => {
+						const errors: Record<string, string> = {};
+
+						if (values.name.length <= 6)
+							errors.name = 'User name should be more that 6 characters.';
+						if (values.room.length === 0)
+							errors.room = 'Room name should not be empty.';
+						return errors;
 					}}
 				>
-					{({ isSubmitting }) => (
+					{({ isSubmitting, errors }) => (
 						<Form
 							style={{
 								display: 'flex',
@@ -64,6 +82,8 @@ const CreateChatRoomScreen: React.FC = (props) => {
 									autoFocus={true}
 									name='name'
 									fullWidth
+									helperText={errors.name}
+									error={!!errors.name}
 									label='User Name'
 									as={TextField}
 								/>
@@ -72,6 +92,8 @@ const CreateChatRoomScreen: React.FC = (props) => {
 								<Field
 									variant='outlined'
 									fullWidth
+									helperText={errors.room}
+									error={!!errors.room}
 									label='Room Name'
 									name='room'
 									as={TextField}
@@ -92,13 +114,13 @@ const CreateChatRoomScreen: React.FC = (props) => {
 				open={openDialog}
 				onClose={handleClose}
 				content={
-					'You are not Authenticated. So Click on OK button to go to the home page to sign In.'
+					'You are not Authenticated. So Click on OK button to go to the Home page to sign In.'
 				}
 				title={'Warning!'}
 				okButtonText={'OK'}
 				notOkButtonText={'Cancel'}
 				onOkHandled={() => {
-					console.log('helloworld');
+					history.replace('/');
 				}}
 			/>
 		</div>

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => {
 			padding: '15px',
 		},
 		TextFieldStyle: {
-			margin: '10px 20px',
+			margin: '6px 20px',
 			backgroundColor: '#F6F3F3',
 		},
 		LoginorSignupButton: {

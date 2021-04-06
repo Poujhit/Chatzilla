@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Button, Card, TextField, Typography } from '@material-ui/core';
+import {
+	Button,
+	Card,
+	Snackbar,
+	TextField,
+	Typography,
+} from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import HashLoader from 'react-spinners/HashLoader';
 import useStyles from './AuthScreenStyles';
@@ -27,9 +33,13 @@ const AuthScreen: React.FC = (props) => {
 	const classes = useStyles();
 	const history = useHistory();
 
+	const [openAlert, setOpenAlert] = React.useState(false);
+
 	const isLogin = authStore((state) => state.isLogin);
 	const setSignUp = authStore((state) => state.setSignUp);
 	const userData = userDataStore((state) => state);
+
+	const initialSignInValues: UserDataForm = { email: '', password: '' };
 
 	const mutation = useMutation((newuser: UserDataForm) => {
 		if (isLogin) {
@@ -46,7 +56,13 @@ const AuthScreen: React.FC = (props) => {
 		);
 	});
 
-	const initialSignInValues: UserDataForm = { email: '', password: '' };
+	const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpenAlert(false);
+	};
 
 	return (
 		<div className={classes.Background}>
@@ -75,7 +91,20 @@ const AuthScreen: React.FC = (props) => {
 					</Typography>
 
 					<Formik
+						validateOnChange={true}
 						initialValues={initialSignInValues}
+						validate={(values) => {
+							const errors: Record<string, string> = {};
+							const regexp = new RegExp(
+								/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+							);
+
+							if (!regexp.test(values.email)) errors.email = 'Email Invalid';
+							console.log(values.password.length);
+							if (values.password.length <= 6)
+								errors.password = 'Password length should be greater than 6.';
+							return errors;
+						}}
 						onSubmit={(values, actions) => {
 							actions.setSubmitting(true);
 
@@ -90,12 +119,13 @@ const AuthScreen: React.FC = (props) => {
 									userData.setIsAuthenticated(true);
 
 									history.push(`/create-chat-room-${response.data.localId}`);
-								});
+								})
+								.catch((error) => setOpenAlert(true));
 
 							actions.setSubmitting(false);
 						}}
 					>
-						{({ isSubmitting }) => (
+						{({ isSubmitting, errors }) => (
 							<Form
 								style={{
 									display: 'flex',
@@ -112,6 +142,8 @@ const AuthScreen: React.FC = (props) => {
 										name='email'
 										fullWidth
 										label='Email'
+										error={!!errors.email}
+										helperText={errors.email}
 										as={TextField}
 									/>
 								</div>
@@ -121,7 +153,9 @@ const AuthScreen: React.FC = (props) => {
 										autoFocus={true}
 										type='password'
 										fullWidth
+										error={!!errors.password}
 										label='Password'
+										helperText={errors.password}
 										name='password'
 										as={TextField}
 									/>
@@ -155,6 +189,24 @@ const AuthScreen: React.FC = (props) => {
 					</Button>
 				</div>
 			</Card>
+
+			<Snackbar
+				open={openAlert}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				action={
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							alignItems: 'center',
+						}}
+					>
+						Password or Email is wrong or you have already sign-up with our
+						service.
+					</div>
+				}
+			/>
 		</div>
 	);
 };

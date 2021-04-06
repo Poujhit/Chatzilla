@@ -15,7 +15,7 @@ const useCreateChatRoomStyles = makeStyles((theme: Theme) => {
 		Card: {
 			width: '30%',
 			height: '60%',
-			backgroundColor: '#4AB8F9',
+			backgroundColor: '#D6FEFF',
 			display: 'flex',
 
 			flexDirection: 'column',
@@ -38,7 +38,7 @@ const useCreateChatRoomStyles = makeStyles((theme: Theme) => {
 		},
 		TextFieldStyle: {
 			margin: '10px 20px',
-			backgroundColor: '#4AB8F9',
+			backgroundColor: '#D6FEFF',
 		},
 		submitButton: {
 			borderRadius: '20px',
