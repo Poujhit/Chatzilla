@@ -11,6 +11,7 @@ import authStore from '../../stores/AuthStore';
 import { useMutation } from 'react-query';
 import axios, { AxiosResponse } from 'axios';
 import print from '../../print';
+import userDataStore from '../../stores/UserDataStore';
 
 interface UserDataForm {
 	email: string;
@@ -28,6 +29,7 @@ const AuthScreen: React.FC = (props) => {
 
 	const isLogin = authStore((state) => state.isLogin);
 	const setSignUp = authStore((state) => state.setSignUp);
+	const userData = userDataStore((state) => state);
 
 	const mutation = useMutation((newuser: UserDataForm) => {
 		if (isLogin) {
@@ -81,7 +83,12 @@ const AuthScreen: React.FC = (props) => {
 								.mutateAsync(values)
 								.then((response: AxiosResponse<AuthServerResponse>) => {
 									print(response.data.localId);
-									// after authentication go to the create chat room
+									// after authentication go to the create chat room and store user
+									//  it in the zustand store (userDataStore.ts)
+									userData.setEmail(response.data.email);
+									userData.setUserId(response.data.localId);
+									userData.setIsAuthenticated(true);
+
 									history.push(`/create-chat-room-${response.data.localId}`);
 								});
 
