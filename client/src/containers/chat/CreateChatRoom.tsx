@@ -9,7 +9,7 @@ import PopUpDialog from '../../components/Dialog';
 import roomDataStore from '../../stores/RoomDataStore';
 
 interface ChatRoom {
-	name: string;
+	username: string;
 	room: string;
 }
 
@@ -19,6 +19,8 @@ const CreateChatRoomScreen: React.FC = (props) => {
 	const [openDialog, setOpenDialog] = React.useState(false);
 	const userData = userDataStore((state) => state);
 	const roomData = roomDataStore((state) => state);
+	const roomName = roomDataStore((state) => state.room);
+	const setRoomName = roomDataStore((state) => state.setRoom);
 
 	const DialogOpen = () => {
 		setOpenDialog(true);
@@ -29,7 +31,7 @@ const CreateChatRoomScreen: React.FC = (props) => {
 	};
 
 	const initialValues: ChatRoom = {
-		name: '',
+		username: '',
 		room: '',
 	};
 
@@ -41,24 +43,25 @@ const CreateChatRoomScreen: React.FC = (props) => {
 					Join or create a Room
 				</Typography>
 				<Formik
-					validateOnChange={true}
 					initialValues={initialValues}
 					onSubmit={(values, actions) => {
 						actions.setSubmitting(true);
 						if (!userData.isAuthenticated) {
+							actions.setSubmitting(false);
 							DialogOpen();
-							actions.setSubmitting(false);
-						} else {
-							roomData.setName(values.name);
-							roomData.setRoom(values.room);
-							actions.setSubmitting(false);
-							history.push(`/chat-room${values.room}`);
+							return;
 						}
+
+						console.log(values);
+						roomData.setName(values.username);
+						roomData.setRoom(values.room);
+						actions.setSubmitting(false);
+						history.push(`/chat-room${values.room}`);
 					}}
 					validate={(values) => {
 						const errors: Record<string, string> = {};
 
-						if (values.name.length <= 6)
+						if (values.username.length <= 6)
 							errors.name = 'User name should be more that 6 characters.';
 						if (values.room.length === 0)
 							errors.room = 'Room name should not be empty.';
@@ -80,10 +83,10 @@ const CreateChatRoomScreen: React.FC = (props) => {
 									variant='outlined'
 									type='input'
 									autoFocus={true}
-									name='name'
+									name='username'
 									fullWidth
-									helperText={errors.name}
-									error={!!errors.name}
+									helperText={errors.username}
+									error={!!errors.username}
 									label='User Name'
 									as={TextField}
 								/>

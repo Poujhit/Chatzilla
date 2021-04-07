@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import AuthScreen from './containers/Auth/AuthScreen';
-import ChatScreen from './containers/chat/ChatScreen';
+import ChatScreen from './containers/chat/ChatScreen/ChatScreen';
 import './App.css';
 import CreateChatRoomScreen from './containers/chat/CreateChatRoom';
 

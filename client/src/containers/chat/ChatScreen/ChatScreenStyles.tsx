@@ -50,23 +50,40 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			color: 'black',
 			// padding: '15px',
 		},
-		TextFieldStyle: {
-			margin: '10px 20px',
-			backgroundColor: '#D6FEFF',
+		MessageInputPortion: {
+			height: '10%',
+			width: '100%',
+
+			// alignItems: 'stretch',
 		},
 		statusBar: {
 			backgroundColor: '#0656D9',
-			height: '60px',
+			height: '10%',
 			width: '100%',
 		},
-		submitButton: {
+		MessagePortion: {
+			height: '90%',
+			width: '100%',
+			postion: 'fixed',
+		},
+		FormPortion: {
+			display: 'flex',
+			height: '100%',
+			flexDirection: 'row',
+			width: '100%',
+			alignItems: 'center',
+			borderTop: '2px solid black',
+			justifyContent: 'space-between',
+		},
+
+		sendButton: {
 			borderRadius: '20px',
 			backgroundColor: '#1D63DC',
 			color: 'white',
-			width: '40%',
-			marginTop: '25px',
-			height: '50px',
-			alignSelf: 'center',
+			marginTop: '2%',
+			marginLeft: '5%',
+			marginBottom: '2%',
+			marginRight: '5%',
 			'&:hover': {
 				color: 'black',
 				borderRadius: '20px',
