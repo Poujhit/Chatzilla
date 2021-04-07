@@ -7,6 +7,6 @@ A Simple Private Chat Room Application made using React/Typescript and NodeJs.
 - Users can create chat rooms on the go.
 - Simple login process.
 - All your chats are not stored anywhere.
-- All your conversations are private.
+- All your conversations are private and are tied to that particular room.
 
 ## Support
