@@ -1,0 +1,11 @@
+.Scroll {
+	overflow: auto;
+	flex: auto;
+}
+
+.Scrollbutton {
+	background-color: white;
+}
+.Scrollbutton:hover {
+	background-color: antiquewhite;
+}
