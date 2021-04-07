@@ -1,9 +1,18 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { CSSProperties } from 'react';
 
 const useChatScreenStyles = makeStyles((theme: Theme) => {
+	const cardcontents: CSSProperties = {
+		width: '50%',
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	};
+
 	return createStyles({
 		Background: {
-			backgroundColor: '#094198',
+			backgroundColor: '#050934',
 			width: '100%',
 			height: '100%',
 			position: 'absolute',
@@ -13,21 +22,26 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			justifyContent: 'center',
 		},
 		Card: {
-			width: '30%',
-			height: '60%',
+			width: '60%',
+			height: '80%',
 			backgroundColor: '#D6FEFF',
 			display: 'flex',
-
-			flexDirection: 'column',
-			alignItems: 'center',
-			// justifyContent: 'center',
+			flexDirection: 'row',
+		},
+		leftPortionOfCard: {
+			...cardcontents,
+			postion: 'fixed',
+			backgroundColor: '#032470',
+		},
+		chatPortion: {
+			...cardcontents,
 		},
 		title: {
 			fontFamily: 'Rubik, sans-serif',
-			color: 'black',
-			fontSize: '50px',
+			color: 'white',
+			fontSize: '30px',
 			fontWeight: 'bold',
-			marginTop: '4%',
+			marginTop: '5%',
 		},
 		subTitle: {
 			fontFamily: 'Rubik, sans-serif',
@@ -39,6 +53,11 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 		TextFieldStyle: {
 			margin: '10px 20px',
 			backgroundColor: '#D6FEFF',
+		},
+		statusBar: {
+			backgroundColor: '#0656D9',
+			height: '60px',
+			width: '100%',
 		},
 		submitButton: {
 			borderRadius: '20px',
