@@ -10,17 +10,22 @@ type State = {
 const roomDataStore = create<State>((set) => ({
 	name: '',
 	room: '',
-	isAuthenticated: false,
-	setName: (name) =>
-		set((state) => ({
-			...state,
-			name: name,
-		})),
-	setRoom: (room) =>
-		set((state) => ({
-			...state,
-			room: room,
-		})),
+	setName: (newname) =>
+		set(
+			(state) => ({
+				...state,
+				name: newname,
+			}),
+			true
+		),
+	setRoom: (roomname) =>
+		set(
+			(state) => ({
+				...state,
+				room: roomname,
+			}),
+			true
+		),
 }));
 
 export default roomDataStore;
