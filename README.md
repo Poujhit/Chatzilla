@@ -9,4 +9,10 @@ A Simple Private Chat Room Application made using React/Typescript and NodeJs.
 - All your chats are not stored anywhere.
 - All your conversations are private and are tied to that particular room.
 
-## Support
+## About Me
+
+To See my Other Projects
+
+- [My Github Profile](https://github.com/Poujhit)
+
+Drop a ⭐ if you liked this Project. Any issues do report. Suggestions are Welcomed.😁
