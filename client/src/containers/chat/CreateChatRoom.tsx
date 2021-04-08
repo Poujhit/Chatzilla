@@ -19,8 +19,6 @@ const CreateChatRoomScreen: React.FC = (props) => {
 	const [openDialog, setOpenDialog] = React.useState(false);
 	const userData = userDataStore((state) => state);
 	const roomData = roomDataStore((state) => state);
-	const roomName = roomDataStore((state) => state.room);
-	const setRoomName = roomDataStore((state) => state.setRoom);
 
 	const DialogOpen = () => {
 		setOpenDialog(true);
@@ -40,7 +38,7 @@ const CreateChatRoomScreen: React.FC = (props) => {
 			<Card className={classes.Card} variant='elevation' raised>
 				<Typography className={classes.title}>Join</Typography>
 				<Typography className={classes.subTitle}>
-					Join or create a Room
+					Join or create a Chat Room
 				</Typography>
 				<Formik
 					initialValues={initialValues}
@@ -51,18 +49,16 @@ const CreateChatRoomScreen: React.FC = (props) => {
 							DialogOpen();
 							return;
 						}
-
-						console.log(values);
 						roomData.setName(values.username);
 						roomData.setRoom(values.room);
 						actions.setSubmitting(false);
-						history.push(`/chat-room${values.room}`);
+						history.push(`/chat-room-${values.room}`);
 					}}
 					validate={(values) => {
 						const errors: Record<string, string> = {};
 
 						if (values.username.length <= 6)
-							errors.name = 'User name should be more that 6 characters.';
+							errors.username = 'User name should be more that 6 characters.';
 						if (values.room.length === 0)
 							errors.room = 'Room name should not be empty.';
 						return errors;

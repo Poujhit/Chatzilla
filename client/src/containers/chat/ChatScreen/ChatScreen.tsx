@@ -1,112 +1,131 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import io, { Socket } from 'socket.io-client';
-import { Card, Typography } from '@material-ui/core';
+import { Button, Card, Typography } from '@material-ui/core';
 import useChatScreenStyles from './ChatScreenStyles';
 import roomDataStore from '../../../stores/RoomDataStore';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
-import ScrollingComponent from '../../../components/ScrolltoBottom.jsx';
+import MessagePortion from './MessagePortion';
+import MessageInputPortion from './MessageInputPortion';
+import userDataStore from '../../../stores/UserDataStore';
+import { useHistory } from 'react-router-dom';
+import UserList from './UsersList';
 
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-type Message = {
+
+export type Message = {
 	user: string;
 	text: string;
 };
 
-type Users = {
+export type User = {
 	room: string;
-	users: string[];
+	users: [
+		{
+			id: string;
+			name: string;
+			room: string;
+		}
+	];
 };
 
 const ChatScreen: React.FC = (props) => {
 	const classes = useChatScreenStyles();
+
 	const roomData = roomDataStore((state) => state);
-	// const [users, setUsers] = useState('');
-	// const [message, setMessage] = useState('');
-	// const [messages, setMessages] = useState<Message[]>([]);
+
+	const isAuthenticated = userDataStore((state) => state.isAuthenticated);
+
+	const [messages, setMessages] = useState<Message[]>([]);
+	const [users, setUsers] = useState<User>();
+
+	const history = useHistory();
 
 	useEffect(() => {
-		// const { name, room } = queryString.parse(location.search);
-		const connectionOptions: any = {
-			'force new connection': true,
-			reconnectionAttempts: 'Infinity',
-			timeout: 10000,
-			transports: ['websocket'],
-		};
+		if (isAuthenticated) {
+			const connectionOptions: any = {
+				'force new connection': true,
+				reconnectionAttempts: 'Infinity',
+				timeout: 10000,
+				transports: ['websocket'],
+			};
 
-		socket = io('http://localhost:5000/', connectionOptions);
-		console.log('here in chat room ' + roomData.name + ' ' + roomData.room);
+			socket = io(
+				'https://private-chat-app-server.herokuapp.com/',
+				connectionOptions
+			);
+			// console.log('here in chat room ' + roomData.name + ' ' + roomData.room);
 
-		socket.emit('join', { name: roomData.name, room: roomData.room });
-	}, [roomData]);
+			socket.emit('join', { name: roomData.name, room: roomData.room });
+		}
+	}, [isAuthenticated, roomData]);
 
 	useEffect(() => {
-		socket.on('message', (message: Message) => {
-			//   setMessages(messages => [ ...messages, message ]);
-			console.log('message:' + message.text + ' ' + message.user);
-		});
+		if (isAuthenticated) {
+			socket.on('message', (message: Message) => {
+				setMessages((messages) => [...messages, message]);
+				// console.log('message:' + message.text + ' ' + message.user);
+			});
 
-		socket.on('roomData', (usersInroom: Users) => {
-			// setUsers(users);
-			console.log(usersInroom.users);
-		});
-	}, []);
+			socket.on('roomData', (usersInroom: User) => {
+				setUsers(usersInroom);
+			});
+		}
+	}, [isAuthenticated]);
 
-	// const sendMessage = () => {
-	// 	socket.emit('sendMessage', 'hello from me');
-	// };
+	const sendMessage = (userTypedMessage: string) => {
+		socket.emit('sendMessage', userTypedMessage);
+	};
 
 	return (
 		<div className={classes.Background}>
-			<Card className={classes.Card}>
-				<div className={classes.leftPortionOfCard}>
-					<Typography className={classes.title}>
-						Users in this chat room:
+			{!isAuthenticated ? (
+				<Card
+					className={classes.Card}
+					style={{
+						justifyContent: 'center',
+						width: '30%',
+						height: '30%',
+						flexDirection: 'column',
+						alignItems: 'center',
+					}}
+				>
+					<Typography
+						style={{
+							fontFamily: 'Rubik',
+							fontWeight: 'bold',
+							fontSize: '20px',
+							color: 'darkblue',
+						}}
+					>
+						You are not authenticated. Go to the home page to login.
 					</Typography>
-					<ScrollingComponent>
-						<p>
-							Nostrud nisi duis veniam ex esse laboris consectetur officia et.
-							Velit cillum est veniam culpa magna sit exercitation excepteur
-							consectetur ea proident. Minim pariatur nisi dolore Lorem ipsum
-							adipisicing do. Ea cupidatat Lorem sunt fugiat. Irure est sunt
-							nostrud commodo sint.
-						</p>
-						<p>
-							Duis consectetur ad in fugiat et aliquip esse adipisicing occaecat
-							et sunt ea occaecat ad. Tempor anim consequat commodo veniam
-							nostrud sunt deserunt adipisicing Lorem Lorem magna irure. Eu ut
-							ipsum magna nulla sunt duis Lorem officia pariatur. Nostrud nisi
-							anim nostrud ea est do nostrud cupidatat occaecat dolor labore do
-							anim. Laborum quis veniam ipsum ullamco voluptate sit ea qui
-							adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui
-							amet. Pariatur esse pariatur veniam non fugiat laboris eu nulla
-							incididunt.
-						</p>
-						<p>
-							Duis consectetur ad in fugiat et aliquip esse adipisicing occaecat
-							et sunt ea occaecat ad. Tempor anim consequat commodo veniam
-							nostrud sunt deserunt adipisicing Lorem Lorem magna irure. Eu ut
-							ipsum magna nulla sunt duis Lorem officia pariatur. Nostrud nisi
-							anim nostrud ea est do nostrud cupidatat occaecat dolor labore do
-							anim. Laborum quis veniam ipsum ullamco voluptate sit ea qui
-							adipisicing aliqua sunt dolor nulla. Nulla consequat sunt qui
-							amet. Pariatur esse pariatur veniam non fugiat laboris eu nulla
-							incididunt.
-						</p>
-						<p>
-							Laboris duis do consectetur aliquip non aliquip ad ad quis minim.
-							Aute magna tempor occaecat magna fugiat culpa. Commodo id eiusmod
-							ea pariatur consequat fugiat minim est anim. Ipsum amet ipsum eu
-							nisi. Exercitation minim amet incididunt tempor do ut id in
-							officia eu sit est. Dolor qui laboris laboris tempor sunt velit
-							eiusmod non ipsum exercitation ut sint ipsum officia.
-						</p>
-					</ScrollingComponent>
-				</div>
-				<div className={classes.chatPortion}>
-					<div className={classes.statusBar}></div>
-				</div>
-			</Card>
+					<Button
+						className={classes.sendButton}
+						onClick={() => history.replace('/')}
+					>
+						Ok
+					</Button>
+				</Card>
+			) : (
+				<Card className={classes.Card}>
+					<div className={classes.leftPortionOfCard}>
+						<Typography className={classes.title}>
+							Users in this chat room:
+						</Typography>
+						<UserList users={users} />
+					</div>
+					<div className={classes.chatPortion}>
+						<div className={classes.statusBar}>
+							<Typography className={classes.statusBarTitle}>
+								{`${roomData.room} chat room`}
+							</Typography>
+						</div>
+						<MessagePortion messages={messages} name={roomData.name} />
+						<MessageInputPortion submitChat={sendMessage} />
+					</div>
+				</Card>
+			)}
 		</div>
 	);
 };

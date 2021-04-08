@@ -33,6 +33,9 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			postion: 'fixed',
 			backgroundColor: '#032470',
 		},
+		ScrollingLeftPortion: {
+			width: '100%',
+		},
 		chatPortion: {
 			...cardcontents,
 		},
@@ -42,6 +45,12 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			fontSize: '30px',
 			fontWeight: 'bold',
 			marginTop: '5%',
+		},
+		statusBarTitle: {
+			fontFamily: 'Rubik, sans-serif',
+			color: 'white',
+			fontSize: '30px',
+			fontWeight: 'bold',
 		},
 		subTitle: {
 			fontFamily: 'Rubik, sans-serif',
@@ -58,13 +67,16 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 		},
 		statusBar: {
 			backgroundColor: '#0656D9',
-			height: '10%',
+			height: '12%',
 			width: '100%',
+			display: 'flex',
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'center',
 		},
 		MessagePortion: {
-			height: '90%',
+			height: '88%',
 			width: '100%',
-			postion: 'fixed',
 		},
 		FormPortion: {
 			display: 'flex',
@@ -75,7 +87,11 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			borderTop: '2px solid black',
 			justifyContent: 'space-between',
 		},
-
+		userListItems: {
+			color: 'white',
+			fontFamily: 'Rubik, sans-serif',
+			fontSize: '25px',
+		},
 		sendButton: {
 			borderRadius: '20px',
 			backgroundColor: '#1D63DC',
