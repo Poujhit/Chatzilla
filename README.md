@@ -1,13 +1,13 @@
-# Chat App
+# Chatzilla
 
-A Simple Private Chat Room Application made using React/Typescript and NodeJs.
+A Private Chat Room Application made using React/Typescript and NodeJs.
 
 ## Features
 
 - Users can create chat rooms on the go.
 - Simple login process.
-- All your chats are not stored anywhere.
-- All your conversations are private and are tied to that particular room.
+- All your chats are not stored anywhere. Even the chat rooms are not stored anywhere.
+- All your conversations are private and unauthorized users can't access it.
 
 ## About Me
 
