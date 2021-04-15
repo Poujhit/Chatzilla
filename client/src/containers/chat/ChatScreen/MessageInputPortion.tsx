@@ -1,5 +1,5 @@
-import { Formik, Form, Field } from 'formik';
 import React from 'react';
+import { Formik, Form, Field } from 'formik';
 import { TextField, Button } from '@material-ui/core';
 
 import useChatScreenStyles from './ChatScreenStyles';
@@ -25,7 +25,6 @@ const MessageInputPortion: React.FC<MessageInputPortionProps> = (props) => {
 				}}
 				onSubmit={(values, actions) => {
 					actions.setSubmitting(true);
-					console.log(values.message);
 					props.submitChat(values.message);
 
 					values.message = '';
