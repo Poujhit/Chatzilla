@@ -5,7 +5,7 @@
 </p>
 
 A Private Chat Room Application made using React/Typescript and NodeJs.\
-Try out [here](https://chatzilla-private-chat.web.app/)
+Try out [here](https://chatzilla-private-chat.web.app/).
 
 ## Features
 
