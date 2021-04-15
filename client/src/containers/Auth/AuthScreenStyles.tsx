@@ -1,7 +1,7 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 import { CSSProperties } from 'react';
 
-const useStyles = makeStyles((theme: Theme) => {
+const useStyles = makeStyles(() => {
 	const cardcontents: CSSProperties = {
 		width: '50%',
 		height: '100%',
