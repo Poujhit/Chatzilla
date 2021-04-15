@@ -1,8 +1,9 @@
 import React from 'react';
 import ScrollableFeed from 'react-scrollable-feed';
-import EachMessage from '../../../components/messages/EachMessage';
+
 import { Message } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';
+import EachMessage from '../../../components/messages/EachMessage';
 
 interface MessagePortionProps {
 	messages: Message[];

@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 
-const eachMessageStyles = makeStyles((_: Theme) =>
+const eachMessageStyles = makeStyles(() =>
 	createStyles({
 		myMessageContainer: {
 			display: 'flex',
@@ -8,7 +8,6 @@ const eachMessageStyles = makeStyles((_: Theme) =>
 			marginTop: '10px',
 			marginLeft: '10px',
 		},
-
 		myMessageTextBox: {
 			backgroundColor: '#032470',
 

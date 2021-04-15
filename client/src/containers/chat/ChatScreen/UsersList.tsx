@@ -1,5 +1,6 @@
 import React from 'react';
 import ScrollableFeed from 'react-scrollable-feed';
+
 import { User } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';
 
