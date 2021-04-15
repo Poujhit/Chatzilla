@@ -6,34 +6,44 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
 		<meta
-			name="Chat app"
+			name="ChatZilla"
 			content="A Private chat app created using react and nodejs"
 		/>
 		<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
 		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-		<title>Chat App</title>
+		<title>ChatZilla</title>
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
-		<div id="root"></div>
-		<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 
-		<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+		<div id="root"></div>
+
+		<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
 
 		<script>
-			// All services except firebase analytics is disabled.
+			// Only Analytics is enables. All other services are disabled.
 			var firebaseConfig = {
-				apiKey: 'AIzaSyC02zYRkV5eNPqQ5qHW7rYWq3_koqSUUKs',
-				authDomain: 'chat-app-200ff.firebaseapp.com',
-				projectId: 'chat-app-200ff',
-				storageBucket: 'chat-app-200ff.appspot.com',
-				messagingSenderId: '473468272750',
-				appId: '1:473468272750:web:314460fabe1d3793f8a67f',
-				measurementId: 'G-MDQRQDQKW6',
+				apiKey: 'AIzaSyBD-EY5kP_JCZdidMY5TFKPm3OyY5Cpd08',
+				authDomain: 'chatzilla-private-chat.firebaseapp.com',
+				projectId: 'chatzilla-private-chat',
+				storageBucket: 'chatzilla-private-chat.appspot.com',
+				messagingSenderId: '541455193265',
+				appId: '1:541455193265:web:ab947b0e984d174dd87e90',
+				measurementId: 'G-SPJKZ82W20',
 			};
 			firebase.initializeApp(firebaseConfig);
 			firebase.analytics();
 		</script>
 	</body>
 </html>
+
+<!-- 
+"headers": [
+			{
+				"source": "/**",
+				"headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+			}
+		] -->

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
+import { useHistory } from 'react-router-dom';
 import io, { Socket } from 'socket.io-client';
-import { Button, Card, Typography } from '@material-ui/core';
-import useChatScreenStyles from './ChatScreenStyles';
-import roomDataStore from '../../../stores/RoomDataStore';
+import { Button, Card, CircularProgress, Typography } from '@material-ui/core';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
+
+import UserList from './UsersList';
 import MessagePortion from './MessagePortion';
+import useChatScreenStyles from './ChatScreenStyles';
 import MessageInputPortion from './MessageInputPortion';
 import userDataStore from '../../../stores/UserDataStore';
-import { useHistory } from 'react-router-dom';
-import UserList from './UsersList';
+import roomDataStore from '../../../stores/RoomDataStore';
 
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
@@ -29,7 +29,7 @@ export type User = {
 	];
 };
 
-const ChatScreen: React.FC = (props) => {
+const ChatScreen: React.FC = (_) => {
 	const classes = useChatScreenStyles();
 
 	const roomData = roomDataStore((state) => state);
@@ -38,6 +38,7 @@ const ChatScreen: React.FC = (props) => {
 
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [users, setUsers] = useState<User>();
+	const [isLoading, setLoading] = useState(true);
 
 	const history = useHistory();
 
@@ -54,7 +55,6 @@ const ChatScreen: React.FC = (props) => {
 				'https://private-chat-app-server.herokuapp.com/',
 				connectionOptions
 			);
-			// console.log('here in chat room ' + roomData.name + ' ' + roomData.room);
 
 			socket.emit('join', { name: roomData.name, room: roomData.room });
 		}
@@ -64,11 +64,11 @@ const ChatScreen: React.FC = (props) => {
 		if (isAuthenticated) {
 			socket.on('message', (message: Message) => {
 				setMessages((messages) => [...messages, message]);
-				// console.log('message:' + message.text + ' ' + message.user);
 			});
 
 			socket.on('roomData', (usersInroom: User) => {
 				setUsers(usersInroom);
+				setLoading(false);
 			});
 		}
 	}, [isAuthenticated]);
@@ -76,6 +76,7 @@ const ChatScreen: React.FC = (props) => {
 	const sendMessage = (userTypedMessage: string) => {
 		socket.emit('sendMessage', userTypedMessage);
 	};
+	console.log(isLoading);
 
 	return (
 		<div className={classes.Background}>
@@ -120,9 +121,30 @@ const ChatScreen: React.FC = (props) => {
 							<Typography className={classes.statusBarTitle}>
 								{`${roomData.room} chat room`}
 							</Typography>
+							<br />
+							<Button
+								className={classes.closeButton}
+								onClick={() => {
+									history.replace('/');
+								}}
+							>
+								X
+							</Button>
 						</div>
-						<MessagePortion messages={messages} name={roomData.name} />
-						<MessageInputPortion submitChat={sendMessage} />
+						{isLoading ? (
+							<div
+								style={{
+									marginTop: '40%',
+								}}
+							>
+								<CircularProgress />
+							</div>
+						) : (
+							<React.Fragment>
+								<MessagePortion messages={messages} name={roomData.name} />
+								<MessageInputPortion submitChat={sendMessage} />
+							</React.Fragment>
+						)}
 					</div>
 				</Card>
 			)}

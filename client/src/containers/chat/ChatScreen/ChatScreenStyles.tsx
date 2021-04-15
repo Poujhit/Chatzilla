@@ -1,7 +1,7 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 import { CSSProperties } from 'react';
 
-const useChatScreenStyles = makeStyles((theme: Theme) => {
+const useChatScreenStyles = makeStyles(() => {
 	const cardcontents: CSSProperties = {
 		width: '50%',
 		height: '100%',
@@ -49,7 +49,8 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 		statusBarTitle: {
 			fontFamily: 'Rubik, sans-serif',
 			color: 'white',
-			fontSize: '30px',
+			marginLeft: '1em',
+			fontSize: '1.5rem',
 			fontWeight: 'bold',
 		},
 		subTitle: {
@@ -57,13 +58,10 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			fontSize: '20px',
 			marginBottom: '25px',
 			color: 'black',
-			// padding: '15px',
 		},
 		MessageInputPortion: {
 			height: '10%',
 			width: '100%',
-
-			// alignItems: 'stretch',
 		},
 		statusBar: {
 			backgroundColor: '#0656D9',
@@ -72,7 +70,7 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 			display: 'flex',
 			flexDirection: 'row',
 			alignItems: 'center',
-			justifyContent: 'center',
+			justifyContent: 'space-between',
 		},
 		MessagePortion: {
 			height: '88%',
@@ -104,6 +102,17 @@ const useChatScreenStyles = makeStyles((theme: Theme) => {
 				color: 'black',
 				borderRadius: '20px',
 				border: '2px solid #1D63DC',
+			},
+		},
+		closeButton: {
+			marginRight: '1rem',
+			color: 'white',
+			fontSize: '1em',
+			borderRadius: '18px',
+			'&:hover': {
+				backgroundColor: 'white',
+				color: 'black',
+				borderRadius: '20px',
 			},
 		},
 	});
