@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 
-const useCreateChatRoomStyles = makeStyles((theme: Theme) => {
+const useCreateChatRoomStyles = makeStyles(() => {
 	return createStyles({
 		Background: {
 			backgroundColor: '#094198',
@@ -20,7 +20,6 @@ const useCreateChatRoomStyles = makeStyles((theme: Theme) => {
 
 			flexDirection: 'column',
 			alignItems: 'center',
-			// justifyContent: 'center',
 		},
 		title: {
 			fontFamily: 'Rubik, sans-serif',
@@ -34,7 +33,6 @@ const useCreateChatRoomStyles = makeStyles((theme: Theme) => {
 			fontSize: '20px',
 			marginBottom: '25px',
 			color: 'black',
-			// padding: '15px',
 		},
 		TextFieldStyle: {
 			margin: '10px 20px',
