@@ -1,6 +1,6 @@
 {
-	"short_name": "Chat App",
-	"name": "A Simple chat app using React and Nodejs.",
+	"short_name": "ChatZilla",
+	"name": "A Private chat app using React and Nodejs.",
 	"icons": [
 		{
 			"src": "icon.png",
