@@ -29,7 +29,7 @@ export type User = {
 	];
 };
 
-const ChatScreen: React.FC = (_) => {
+const ChatScreen: React.FC = () => {
 	const classes = useChatScreenStyles();
 
 	const roomData = roomDataStore((state) => state);
