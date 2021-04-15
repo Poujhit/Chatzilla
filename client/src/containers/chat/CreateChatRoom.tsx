@@ -1,19 +1,19 @@
 import React from 'react';
+import { Field, Form, Formik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import { Button, Card, TextField, Typography } from '@material-ui/core';
 
-import useCreateChatRoomStyles from './CreateChatRoomStyles';
-import { useHistory } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
 import userDataStore from '../../stores/UserDataStore';
 import PopUpDialog from '../../components/Dialog';
 import roomDataStore from '../../stores/RoomDataStore';
+import useCreateChatRoomStyles from './CreateChatRoomStyles';
 
 interface ChatRoom {
 	username: string;
 	room: string;
 }
 
-const CreateChatRoomScreen: React.FC = (props) => {
+const CreateChatRoomScreen: React.FC = () => {
 	const classes = useCreateChatRoomStyles();
 	const history = useHistory();
 	const [openDialog, setOpenDialog] = React.useState(false);
