@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
 	Button,
 	Card,
@@ -9,15 +8,15 @@ import {
 } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import HashLoader from 'react-spinners/HashLoader';
-import useStyles from './AuthScreenStyles';
 import { useHistory } from 'react-router-dom';
+import axios, { AxiosResponse } from 'axios';
+import { useMutation } from 'react-query';
+
+import useStyles from './AuthScreenStyles';
+import authStore from '../../stores/AuthStore';
+import userDataStore from '../../stores/UserDataStore';
 
 import Logo from '../../images/logo.png';
-import authStore from '../../stores/AuthStore';
-import { useMutation } from 'react-query';
-import axios, { AxiosResponse } from 'axios';
-import print from '../../print';
-import userDataStore from '../../stores/UserDataStore';
 
 interface UserDataForm {
 	email: string;
@@ -28,8 +27,7 @@ interface AuthServerResponse {
 	localId: string;
 }
 
-const AuthScreen: React.FC = (props) => {
-	console.log(props);
+const AuthScreen: React.FC = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -43,15 +41,13 @@ const AuthScreen: React.FC = (props) => {
 
 	const mutation = useMutation((newuser: UserDataForm) => {
 		if (isLogin) {
-			console.log('signin');
 			return axios.post(
-				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC02zYRkV5eNPqQ5qHW7rYWq3_koqSUUKs',
+				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD-EY5kP_JCZdidMY5TFKPm3OyY5Cpd08',
 				{ ...newuser, returnSecureToken: true }
 			);
 		}
-		console.log('signup');
 		return axios.post(
-			'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC02zYRkV5eNPqQ5qHW7rYWq3_koqSUUKs',
+			'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD-EY5kP_JCZdidMY5TFKPm3OyY5Cpd08',
 			{ ...newuser, returnSecureToken: true }
 		);
 	});
@@ -70,12 +66,11 @@ const AuthScreen: React.FC = (props) => {
 				<div className={classes.leftPortionCard}>
 					<img src={Logo} className={classes.Image} alt='Logo' />
 					<Typography className={classes.title} paragraph>
-						Chat App
+						ChatZilla
 					</Typography>
 
 					<Typography className={classes.subTitle} paragraph>
-						This is a Simple Chat Room App created using React/Typescript and
-						NodeJS. Login/Sign up to use this app.
+						A Private Chat Room App. Login/Sign up to use this app.
 					</Typography>
 				</div>
 				<div className={classes.rightPortionCard}>
@@ -100,7 +95,6 @@ const AuthScreen: React.FC = (props) => {
 							);
 
 							if (!regexp.test(values.email)) errors.email = 'Email Invalid';
-							console.log(values.password.length);
 							if (values.password.length <= 6)
 								errors.password = 'Password length should be greater than 6.';
 							return errors;
@@ -111,16 +105,13 @@ const AuthScreen: React.FC = (props) => {
 							mutation
 								.mutateAsync(values)
 								.then((response: AxiosResponse<AuthServerResponse>) => {
-									print(response.data.localId);
-									// after authentication go to the create chat room and store user
-									//  it in the zustand store (userDataStore.ts)
 									userData.setEmail(response.data.email);
 									userData.setUserId(response.data.localId);
 									userData.setIsAuthenticated(true);
 
 									history.push(`/create-chat-room-${response.data.localId}`);
 								})
-								.catch((error) => setOpenAlert(true));
+								.catch((_) => setOpenAlert(true));
 
 							actions.setSubmitting(false);
 						}}
@@ -139,6 +130,7 @@ const AuthScreen: React.FC = (props) => {
 									<Field
 										variant='outlined'
 										type='input'
+										autoFocus={true}
 										name='email'
 										fullWidth
 										label='Email'
@@ -150,7 +142,6 @@ const AuthScreen: React.FC = (props) => {
 								<div className={classes.TextFieldStyle}>
 									<Field
 										variant='outlined'
-										autoFocus={true}
 										type='password'
 										fullWidth
 										error={!!errors.password}
