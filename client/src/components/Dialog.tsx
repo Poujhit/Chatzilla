@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	Button,
 	Dialog,
@@ -6,7 +7,6 @@ import {
 	DialogContentText,
 	DialogTitle,
 } from '@material-ui/core';
-import React from 'react';
 
 interface PopUpDialogProps {
 	open: boolean;
