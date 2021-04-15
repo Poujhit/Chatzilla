@@ -1,6 +1,11 @@
 # Chatzilla
 
-A Private Chat Room Application made using React/Typescript and NodeJs.
+<p>
+<img src="./client/public/icon.png"/>
+</p>
+
+A Private Chat Room Application made using React/Typescript and NodeJs.\
+Try out [here](https://chatzilla-private-chat.web.app/)
 
 ## Features
 
