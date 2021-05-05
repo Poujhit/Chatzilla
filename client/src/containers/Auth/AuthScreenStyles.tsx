@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => {
 		},
 		Card: {
 			width: '60%',
-			height: '60%',
+			height: '70%',
 			display: 'flex',
 			flexDirection: 'row',
 		},
@@ -52,7 +52,7 @@ const useStyles = makeStyles(() => {
 			padding: '15px',
 		},
 		TextFieldStyle: {
-			margin: '6px 20px',
+			margin: '20px 20px',
 			backgroundColor: '#F6F3F3',
 		},
 		LoginorSignupButton: {

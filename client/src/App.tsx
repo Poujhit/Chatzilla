@@ -7,7 +7,7 @@ import CreateChatRoomScreen from './containers/chat/CreateChatRoom';
 
 import './App.css';
 
-const App: React.FC = (_) => {
+const App: React.FC = () => {
 	return (
 		<BrowserRouter>
 			<div className='App'>
