@@ -1,4 +1,4 @@
-# Chatzilla
+# ChatZilla
 
 <p>
 <img src="./client/public/icon.png"/>
