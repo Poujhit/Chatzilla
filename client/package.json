@@ -1,8 +1,8 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "main": "public/electron.js",
+  "author": "Poujhit <poujhit.dev@gmail.com>",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.4",
@@ -33,9 +33,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron": "wait-on tcp:3000 && electron .",
-    "dev": "BROWSER=none yarn start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -55,10 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "concurrently": "^6.2.0",
-    "electron": "^13.1.4",
-    "electron-is-dev": "^2.0.0",
-    "wait-on": "^5.3.0"
-  }
+  "devDependencies": {}
 }
