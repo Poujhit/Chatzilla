@@ -1,22 +1,19 @@
 {
-	"name": "chat-app",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "cd client && yarn start"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Chennai-Sharks/Chat-App.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/Chennai-Sharks/Chat-App/issues"
-	},
-	"homepage": "https://github.com/Chennai-Sharks/Chat-App#readme",
-	"dependencies": {}
+  "name": "chatzilla",
+  "version": "1.0.0",
+  "description": "Private chat application",
+  "scripts": {
+    "start": "cd client && yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poujhit/Chatzilla.git"
+  },
+  "author": "Poujhit <poujhit.dev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Poujhit/Chatzilla/issues"
+  },
+  "homepage": "https://github.com/Poujhit/Chatzilla#readme",
+  "dependencies": {}
 }
