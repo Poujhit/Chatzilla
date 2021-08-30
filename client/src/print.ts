@@ -1,5 +1,5 @@
 const print = (data: any): void => {
-	console.log(data);
+  console.log(data);
 };
 
 export default print;

@@ -52,7 +52,7 @@ const ChatScreen: React.FC = () => {
       };
 
       socket = io(
-        'https://private-chat-app-server.herokuapp.com/',
+        process.env.REACT_APP_SERVER_URL as string,
         connectionOptions
       );
 
