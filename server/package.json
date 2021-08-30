@@ -1,22 +1,22 @@
 {
-	"name": "chat-app-server",
-	"version": "1.0.0",
-	"description": "Server side for the chat app",
-	"main": "index.js",
-	"private": true,
-	"scripts": {
-		"dev": "nodemon index",
-		"start": "node index"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "MIT",
-	"dependencies": {
-		"express": "^4.17.1",
-		"moment": "^2.29.1",
-		"socket.io": "^4.0.1"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.7"
-	}
+  "name": "chat-app-server",
+  "version": "1.0.0",
+  "description": "Server side for the chat app",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon index",
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "Poujhit <poujhit.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "socket.io": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
