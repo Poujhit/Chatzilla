@@ -44,17 +44,20 @@ const ChatScreen: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      const connectionOptions: any = {
-        'force new connection': true,
-        reconnectionAttempts: 'Infinity',
-        timeout: 10000,
-        transports: ['websocket'],
-      };
+      // const connectionOptions: any = {
+      //   'force new connection': true,
+      //   reconnectionAttempts: 'Infinity',
+      //   timeout: 10000,
+      //   transports: ['websocket'],
+      // };
 
-      socket = io(
-        process.env.REACT_APP_SERVER_URL as string,
-        connectionOptions
-      );
+      socket = io(process.env.REACT_APP_SERVER_URL as string, {
+        autoConnect: true,
+        reconnection: true,
+        reconnectionAttempts: 5,
+        timeout: 10000000000,
+        transports: ['websocket'],
+      });
 
       socket.emit('join', { name: roomData.name, room: roomData.room });
     }
