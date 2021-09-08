@@ -77,9 +77,9 @@ const ChatScreen: React.FC = () => {
   }, [isAuthenticated]);
 
   const sendMessage = (userTypedMessage: string) => {
+    console.log(socket.active);
     socket.emit('sendMessage', userTypedMessage);
   };
-  console.log(isLoading);
 
   return (
     <div className={classes.Background}>
