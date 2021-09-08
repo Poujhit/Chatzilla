@@ -11,7 +11,6 @@
 # production
 /build
 
-FirebaseConfig.ts
 
 # misc
 .DS_Store
@@ -24,7 +23,4 @@ FirebaseConfig.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 
-# Firebase
-.firebase/
