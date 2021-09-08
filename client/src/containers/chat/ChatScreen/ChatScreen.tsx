@@ -55,7 +55,6 @@ const ChatScreen: React.FC = () => {
         autoConnect: true,
         reconnection: true,
         reconnectionAttempts: 5,
-        timeout: 10000000000,
         transports: ['websocket'],
       });
 
@@ -78,6 +77,9 @@ const ChatScreen: React.FC = () => {
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.connected);
+    if (!socket.connected) {
+      socket.connect();
+    }
     socket.emit('sendMessage', userTypedMessage);
   };
 
