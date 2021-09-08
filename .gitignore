@@ -3,9 +3,6 @@
 /.pnp
 .pnp.js
 
-# package-lock.json is ignored in client as yarn.lock is already there. 
-package-lock.json
-!server/package-lock.json
 
 # misc
 .DS_Store
@@ -14,7 +11,6 @@ package-lock.json
 .env.test.local
 .env.production.local
 
-firebasekey.js
 
 npm-debug.log*
 yarn-debug.log*
