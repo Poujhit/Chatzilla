@@ -77,7 +77,7 @@ const ChatScreen: React.FC = () => {
   }, [isAuthenticated]);
 
   const sendMessage = (userTypedMessage: string) => {
-    console.log(socket.active);
+    console.log(socket.connected);
     socket.emit('sendMessage', userTypedMessage);
   };
 
