@@ -10,7 +10,7 @@ const router = require('./router');
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
-  pingInterval: 36000000,
+  pingInterval: 300000,
 });
 
 app.use(cors());
