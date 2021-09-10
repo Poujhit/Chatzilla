@@ -56,8 +56,6 @@ const ChatScreen: React.FC = () => {
         reconnection: true,
         reconnectionAttempts: 5,
         transports: ['websocket'],
-        // timeout: 3000000000,
-        timeout: 1000,
       });
 
       socket.emit('join', { name: roomData.name, room: roomData.room });
@@ -78,6 +76,7 @@ const ChatScreen: React.FC = () => {
   }, [isAuthenticated]);
 
   const sendMessage = (userTypedMessage: string) => {
+    console.log(socket.id);
     if (!socket.connected) {
       socket.connect();
     }
