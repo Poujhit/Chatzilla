@@ -42,9 +42,10 @@ const ChatScreen: React.FC = () => {
 
   const history = useHistory();
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(socket.connected);
-  },[socket.connected])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket.connected]);
 
   useEffect(() => {
     if (isAuthenticated) {
