@@ -11,15 +11,7 @@ import MessageInputPortion from './MessageInputPortion';
 import userDataStore from '../../../stores/UserDataStore';
 import roomDataStore from '../../../stores/RoomDataStore';
 
-const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(
-  process.env.REACT_APP_SERVER_URL as string,
-  {
-    autoConnect: true,
-    reconnection: true,
-    reconnectionAttempts: 1,
-    transports: ['websocket'],
-  }
-);
+let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
 export type Message = {
   user: string;
@@ -49,6 +41,18 @@ const ChatScreen: React.FC = () => {
   const [isLoading, setLoading] = useState(true);
 
   const history = useHistory();
+
+  useEffect(() => {
+    socket = io(
+      process.env.REACT_APP_SERVER_URL as string,
+      {
+        autoConnect: true,
+        reconnection: true,
+        reconnectionAttempts: 0,
+        transports: ['websocket'],
+      }
+    );
+  },[]);
 
   useEffect(() => {
     if (isAuthenticated) {
