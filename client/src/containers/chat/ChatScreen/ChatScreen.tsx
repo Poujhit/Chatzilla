@@ -54,7 +54,7 @@ const ChatScreen: React.FC = () => {
       socket = io(process.env.REACT_APP_SERVER_URL as string, {
         autoConnect: true,
         reconnection: true,
-        reconnectionAttempts: 5,
+        reconnectionAttempts: 1,
         transports: ['websocket'],
       });
 
