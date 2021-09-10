@@ -47,7 +47,7 @@ const ChatScreen: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
-  const { connected } = socket;
+  // const { connected } = socket;
 
   const history = useHistory();
 
@@ -77,11 +77,14 @@ const ChatScreen: React.FC = () => {
         setLoading(false);
       });
     }
+    socket.on('disconnect', () => {
+      console.log(socket.connected);
+    });
   }, [isAuthenticated]);
 
-  useEffect(() => {
-    console.log(socket.connected);
-  }, [connected]);
+  // useEffect(() => {
+  //   console.log(socket.connected);
+  // }, [connected]);
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
