@@ -15,6 +15,7 @@ app.use(cors());
 app.use(router);
 
 io.on('connect', (socket) => {
+  console.log(socket);
   socket.on('join', ({ name, room }) => {
     const user = addUser({ id: socket.id, name, room });
 
@@ -40,7 +41,8 @@ io.on('connect', (socket) => {
     io.to(user.room).emit('message', { user: user.name, text: message });
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', (reason) => {
+    console.log(reason);
     const user = removeUser(socket.id);
 
     if (user) {
