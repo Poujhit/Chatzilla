@@ -42,6 +42,10 @@ const ChatScreen: React.FC = () => {
 
   const history = useHistory();
 
+  useEffect(()=>{
+    console.log(socket.connected);
+  },[socket.connected])
+
   useEffect(() => {
     if (isAuthenticated) {
       // const connectionOptions: any = {
@@ -131,6 +135,7 @@ const ChatScreen: React.FC = () => {
               <Button
                 className={classes.closeButton}
                 onClick={() => {
+                  socket.disconnect();
                   history.replace('/');
                 }}
               >
