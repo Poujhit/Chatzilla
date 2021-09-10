@@ -11,7 +11,15 @@ import MessageInputPortion from './MessageInputPortion';
 import userDataStore from '../../../stores/UserDataStore';
 import roomDataStore from '../../../stores/RoomDataStore';
 
-let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+const socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(
+  process.env.REACT_APP_SERVER_URL as string,
+  {
+    autoConnect: true,
+    reconnection: true,
+    reconnectionAttempts: 1,
+    transports: ['websocket'],
+  }
+);
 
 export type Message = {
   user: string;
@@ -43,11 +51,6 @@ const ChatScreen: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(socket.connected);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket.connected]);
-
-  useEffect(() => {
     if (isAuthenticated) {
       // const connectionOptions: any = {
       //   'force new connection': true,
@@ -56,12 +59,7 @@ const ChatScreen: React.FC = () => {
       //   transports: ['websocket'],
       // };
 
-      socket = io(process.env.REACT_APP_SERVER_URL as string, {
-        autoConnect: true,
-        reconnection: true,
-        reconnectionAttempts: 1,
-        transports: ['websocket'],
-      });
+      // socket = ;
 
       socket.emit('join', { name: roomData.name, room: roomData.room });
     }
@@ -79,6 +77,11 @@ const ChatScreen: React.FC = () => {
       });
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    console.log(socket.connected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket.connected]);
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
