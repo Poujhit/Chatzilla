@@ -47,6 +47,7 @@ const ChatScreen: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
+  const { connected } = socket;
 
   const history = useHistory();
 
@@ -80,8 +81,7 @@ const ChatScreen: React.FC = () => {
 
   useEffect(() => {
     console.log(socket.connected);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket.connected]);
+  }, [connected]);
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
