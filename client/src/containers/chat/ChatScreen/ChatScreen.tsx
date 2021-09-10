@@ -79,6 +79,7 @@ const ChatScreen: React.FC = () => {
     console.log(socket.id);
     if (!socket.connected) {
       socket.connect();
+      socket.emit('join', { name: roomData.name, room: roomData.room });
     }
     socket.emit('sendMessage', userTypedMessage);
   };

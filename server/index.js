@@ -20,6 +20,7 @@ app.use(router);
 io.on('connect', (socket) => {
   console.log('connected');
   socket.on('join', ({ name, room }) => {
+    console.log(name,room);
     const user = addUser({ id: socket.id, name, room });
 
     socket.join(user.room);
