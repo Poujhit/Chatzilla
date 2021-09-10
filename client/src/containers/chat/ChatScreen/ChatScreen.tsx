@@ -47,21 +47,11 @@ const ChatScreen: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
-  // const { connected } = socket;
 
   const history = useHistory();
 
   useEffect(() => {
     if (isAuthenticated) {
-      // const connectionOptions: any = {
-      //   'force new connection': true,
-      //   reconnectionAttempts: 'Infinity',
-      //   timeout: 10000,
-      //   transports: ['websocket'],
-      // };
-
-      // socket = ;
-
       socket.emit('join', { name: roomData.name, room: roomData.room });
     }
   }, [isAuthenticated, roomData]);
@@ -79,12 +69,13 @@ const ChatScreen: React.FC = () => {
     }
     socket.on('disconnect', () => {
       console.log(socket.connected);
+      setMessages((messages) => [...messages, {
+        user: 'Admin',
+        text: 'You have left because of connection issue. Send a message to reconnect.',
+      }]);
     });
   }, [isAuthenticated]);
 
-  // useEffect(() => {
-  //   console.log(socket.connected);
-  // }, [connected]);
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
