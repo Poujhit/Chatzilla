@@ -57,6 +57,7 @@ const ChatScreen: React.FC = () => {
         reconnectionAttempts: 5,
         transports: ['websocket'],
         // timeout: 3000000000,
+        timeout: 1000,
       });
 
       socket.emit('join', { name: roomData.name, room: roomData.room });
