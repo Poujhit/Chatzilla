@@ -23,12 +23,13 @@ const useStyles = makeStyles(() => {
     Image: {
       height: '100px',
       width: '95px',
-      marginTop: '40px',
+      marginTop: '70px',
     },
     Card: {
       width: '60%',
       height: '70%',
       display: 'flex',
+      borderRadius: '16px',
       flexDirection: 'row',
     },
     leftPortionCard: {
@@ -47,6 +48,13 @@ const useStyles = makeStyles(() => {
     },
     subTitle: {
       fontFamily: 'Rubik, sans-serif',
+      fontSize: '25px',
+      color: 'white',
+      padding: '15px',
+      fontWeight: 'bold',
+    },
+    subTitle1: {
+      fontFamily: 'Rubik, sans-serif',
       fontSize: '20px',
       color: 'white',
       padding: '15px',
@@ -63,9 +71,10 @@ const useStyles = makeStyles(() => {
       marginTop: '15px',
       height: '50px',
       alignSelf: 'center',
+      transition: 'all .5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       '&:hover': {
-        color: 'black',
-        borderRadius: '20px',
+        backgroundColor: '#1D63DC',
+        borderRadius: '10px',
         border: '2px solid #1D63DC',
       },
     },

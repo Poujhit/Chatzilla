@@ -1,64 +1,24 @@
 import React from 'react';
-import {
-  Button,
-  Card,
-  Snackbar,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Button, Card, TextField, Typography } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import HashLoader from 'react-spinners/HashLoader';
 import { useHistory } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
-import { useMutation } from 'react-query';
 
 import useStyles from './AuthScreenStyles';
-import authStore from '../../stores/AuthStore';
-import userDataStore from '../../stores/UserDataStore';
+import roomDataStore from 'stores/RoomDataStore';
 
-import Logo from '../../images/logo.png';
+import Logo from 'images/logo.png';
 
 interface UserDataForm {
-  email: string;
-  password: string;
-}
-interface AuthServerResponse {
-  email: string;
-  localId: string;
+  username: string;
+  roomname: string;
 }
 
 const AuthScreen: React.FC = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const router = useHistory();
+  const roomData = roomDataStore((state) => state);
 
-  const [openAlert, setOpenAlert] = React.useState(false);
-
-  const isLogin = authStore((state) => state.isLogin);
-  const setSignUp = authStore((state) => state.setSignUp);
-  const userData = userDataStore((state) => state);
-
-  const initialSignInValues: UserDataForm = { email: '', password: '' };
-
-  const mutation = useMutation((newuser: UserDataForm) => {
-    if (isLogin) {
-      return axios.post(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD-EY5kP_JCZdidMY5TFKPm3OyY5Cpd08',
-        { ...newuser, returnSecureToken: true }
-      );
-    }
-    return axios.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD-EY5kP_JCZdidMY5TFKPm3OyY5Cpd08',
-      { ...newuser, returnSecureToken: true }
-    );
-  });
-
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenAlert(false);
-  };
+  const initialSignInValues: UserDataForm = { username: '', roomname: '' };
 
   return (
     <div className={classes.Background}>
@@ -66,54 +26,46 @@ const AuthScreen: React.FC = () => {
         <div className={classes.leftPortionCard}>
           <img src={Logo} className={classes.Image} alt='Logo' />
           <Typography className={classes.title} paragraph>
-            ChatZilla
+            Chatzilla
           </Typography>
 
-          <Typography className={classes.subTitle} paragraph>
-            A Private Chat Room App. Login/Sign up to use this app.
+          <Typography className={classes.subTitle1} paragraph>
+            Private Chat room app
           </Typography>
         </div>
         <div className={classes.rightPortionCard}>
           <Typography
-            className={classes.title}
+            className={classes.subTitle}
             style={{
               color: 'black',
               marginTop: '50px',
             }}
             paragraph
           >
-            {isLogin ? 'Login' : 'Sign Up'}
+            Join or Create a room
           </Typography>
 
           <Formik
-            validateOnChange={true}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validateOnMount={false}
             initialValues={initialSignInValues}
             validate={(values) => {
               const errors: Record<string, string> = {};
-              const regexp = new RegExp(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-              );
 
-              if (!regexp.test(values.email)) errors.email = 'Email Invalid';
-              if (values.password.length <= 6)
-                errors.password = 'Password length should be greater than 6.';
+              if (values.username.length <= 6)
+                errors.username = 'User name should be more that 6 characters.';
+              if (values.roomname.length === 0)
+                errors.room = 'Room name should not be empty.';
+
               return errors;
             }}
             onSubmit={(values, actions) => {
               actions.setSubmitting(true);
-
-              mutation
-                .mutateAsync(values)
-                .then((response: AxiosResponse<AuthServerResponse>) => {
-                  userData.setEmail(response.data.email);
-                  userData.setUserId(response.data.localId);
-                  userData.setIsAuthenticated(true);
-
-                  history.push(`/create-chat-room-${response.data.localId}`);
-                })
-                .catch((_) => setOpenAlert(true));
-
+              roomData.setName(values.username);
+              roomData.setRoom(values.roomname);
               actions.setSubmitting(false);
+              router.push(`/chat-room-${values.roomname}`);
             }}
           >
             {({ isSubmitting, errors }) => (
@@ -131,23 +83,23 @@ const AuthScreen: React.FC = () => {
                     variant='outlined'
                     type='input'
                     autoFocus={true}
-                    name='email'
+                    name='username'
                     fullWidth
-                    label='Email'
-                    error={!!errors.email}
-                    helperText={errors.email}
+                    label='User name'
+                    error={!!errors.username}
+                    helperText={errors.username}
                     as={TextField}
                   />
                 </div>
                 <div className={classes.TextFieldStyle}>
                   <Field
                     variant='outlined'
-                    type='password'
+                    type='roomname'
                     fullWidth
-                    error={!!errors.password}
-                    label='Password'
-                    helperText={errors.password}
-                    name='password'
+                    error={!!errors.roomname}
+                    label='Room Name'
+                    helperText={errors.roomname}
+                    name='roomname'
                     as={TextField}
                   />
                 </div>
@@ -156,48 +108,13 @@ const AuthScreen: React.FC = () => {
                   className={classes.LoginorSignupButton}
                   type='submit'
                 >
-                  {mutation.isLoading ? (
-                    <HashLoader
-                      loading={mutation.isLoading}
-                      size={35}
-                      color='black'
-                    />
-                  ) : (
-                    'submit'
-                  )}
+                  submit
                 </Button>
               </Form>
             )}
           </Formik>
-
-          <Button
-            style={{
-              marginBottom: '15px',
-            }}
-            onClick={() => setSignUp(!isLogin)}
-          >
-            {isLogin ? 'Sign up instead' : 'sign in instead'}
-          </Button>
         </div>
       </Card>
-
-      <Snackbar
-        open={openAlert}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        action={
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            Password or Email is wrong or you have already sign-up with our
-            service.
-          </div>
-        }
-      />
     </div>
   );
 };
