@@ -1,15 +1,15 @@
-const http = require('http');
-const express = require('express');
-const socketio = require('socket.io');
-const cors = require('cors');
+import http from 'http';
+import express from 'express';
+import { Server, Socket } from 'socket.io';
+import cors from 'cors';
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+import router from './router';
 
-const router = require('./router');
+import { addUser, removeUser, getUser, getUsersInRoom } from './users';
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, {
+const io = new Server(server, {
   allowUpgrades: false,
   pingTimeout: 30000,
 });
@@ -17,10 +17,10 @@ const io = socketio(server, {
 app.use(cors());
 app.use(router);
 
-io.on('connect', (socket) => {
+io.on('connect', (socket: Socket) => {
   console.log('connected');
   socket.on('join', ({ name, room }) => {
-    console.log(name,room);
+    console.log(name, room);
     const user = addUser({ id: socket.id, name, room });
 
     socket.join(user.room);
@@ -48,9 +48,9 @@ io.on('connect', (socket) => {
   socket.on('disconnect', (reason) => {
     console.log(reason);
     const user = removeUser(socket.id);
-console.log('here');
+    console.log('here');
     if (user) {
-      console.log(user)
+      console.log(user);
       io.to(user.room).emit('message', {
         user: 'Admin',
         text: `${user.name} has left.`,
