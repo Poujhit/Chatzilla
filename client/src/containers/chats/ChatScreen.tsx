@@ -8,8 +8,8 @@ import UserList from './UsersList';
 import MessagePortion from './MessagePortion';
 import useChatScreenStyles from './ChatScreenStyles';
 import MessageInputPortion from './MessageInputPortion';
-import userDataStore from '../../../stores/UserDataStore';
-import roomDataStore from '../../../stores/RoomDataStore';
+import userDataStore from 'stores/UserDataStore';
+import roomDataStore from 'stores/RoomDataStore';
 
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
@@ -43,16 +43,13 @@ const ChatScreen: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    socket = io(
-      process.env.REACT_APP_SERVER_URL as string,
-      {
-        autoConnect: true,
-        reconnection: false,
-        reconnectionAttempts: 0,
-        transports: ['websocket'],
-      }
-    );
-  },[]);
+    socket = io(process.env.REACT_APP_SERVER_URL as string, {
+      autoConnect: true,
+      reconnection: false,
+      reconnectionAttempts: 0,
+      transports: ['websocket'],
+    });
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -73,13 +70,15 @@ const ChatScreen: React.FC = () => {
     }
     socket.on('disconnect', () => {
       console.log(socket.connected);
-      setMessages((messages) => [...messages, {
-        user: 'Admin',
-        text: 'You have left because of connection issue. Send a message to reconnect.',
-      }]);
+      setMessages((messages) => [
+        ...messages,
+        {
+          user: 'Admin',
+          text: 'You have left because of connection issue. Send a message to reconnect.',
+        },
+      ]);
     });
   }, [isAuthenticated]);
-
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
