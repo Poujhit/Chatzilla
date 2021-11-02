@@ -2,19 +2,29 @@ import http from 'http';
 import express from 'express';
 import { Server, Socket } from 'socket.io';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import router from './router';
-
 import { addUser, removeUser, getUser, getUsersInRoom } from './users';
+
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   allowUpgrades: false,
   pingTimeout: 30000,
+  cors: {
+    origin: process.env.ORIGIN,
+    methods: ['GET', 'POST'],
+  },
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.ORIGIN,
+};
+
+app.use(cors(corsOptions));
 app.use(router);
 
 io.on('connect', (socket: Socket) => {
