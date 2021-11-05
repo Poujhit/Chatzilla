@@ -1,0 +1,33 @@
+nodemon] starting `node ./dist/index.js`
+Server has started.
+[nodemon] restarting due to changes...
+[nodemon] starting `node ./dist/index.js`
+Server has started.
+connected!
+soloerd pikachu
+connected!
+this is ocols pikachu
+client namespace disconnect
+here
+{ id: 'GS_88mnWbmorxIhqAAAD', name: 'this is ocols', room: 'pikachu' }
+connected!
+this is ocols pikachu
+client namespace disconnect
+here
+{ id: 'gX2aF1ebE3SUH74sAAAB', name: 'soloerd', room: 'pikachu' }
+connected!
+this is ocols pikachu
+connected!
+this is ocols pikachu
+D:\React Projects\chatzilla-webapp\server\dist\index.js:50
+        io.to(user.room).emit('message', { user: user.name, text: message });
+                   ^
+
+TypeError: Cannot read property 'room' of undefined
+    at Socket.<anonymous> (D:\React Projects\chatzilla-webapp\server\dist\index.js:50:20)
+    at Socket.emit (node:events:394:28)
+    at Socket.emitUntyped (D:\React Projects\chatzilla-webapp\server\node_modules\socket.io\dist\typed-events.js:69:22)       
+    at D:\React Projects\chatzilla-webapp\server\node_modules\socket.io\dist\socket.js:428:39
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+[nodemon] app crashed - waiting for file changes before starting...
+http://localhost:3000/chat-room-pikachu

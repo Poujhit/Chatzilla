@@ -38,6 +38,7 @@ const useChatScreenStyles = makeStyles(() => {
     },
     chatPortion: {
       ...cardcontents,
+      width: '60%',
     },
     title: {
       fontFamily: 'Rubik, sans-serif',

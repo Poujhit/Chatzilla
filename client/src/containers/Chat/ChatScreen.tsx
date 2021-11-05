@@ -8,8 +8,8 @@ import UserList from './UsersList';
 import MessagePortion from './MessagePortion';
 import useChatScreenStyles from './ChatScreenStyles';
 import MessageInputPortion from './MessageInputPortion';
-import userDataStore from 'stores/UserDataStore';
 import roomDataStore from 'stores/RoomDataStore';
+import BottomBar from 'components/BottomBar/BottomBar';
 
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
@@ -34,8 +34,6 @@ const ChatScreen: React.FC = () => {
 
   const roomData = roomDataStore((state) => state);
 
-  const isAuthenticated = userDataStore((state) => state.isAuthenticated);
-
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
@@ -52,13 +50,13 @@ const ChatScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (roomData.name) {
       socket.emit('join', { name: roomData.name, room: roomData.room });
     }
-  }, [isAuthenticated, roomData]);
+  }, [roomData.name, roomData.room]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (roomData.name) {
       socket.on('message', (message: Message) => {
         setMessages((messages) => [...messages, message]);
       });
@@ -78,7 +76,7 @@ const ChatScreen: React.FC = () => {
         },
       ]);
     });
-  }, [isAuthenticated]);
+  }, [roomData.name]);
 
   const sendMessage = (userTypedMessage: string) => {
     console.log(socket.id);
@@ -91,7 +89,7 @@ const ChatScreen: React.FC = () => {
 
   return (
     <div className={classes.Background}>
-      {!isAuthenticated ? (
+      {!roomData.name ? (
         <Card
           className={classes.Card}
           style={{
@@ -160,6 +158,7 @@ const ChatScreen: React.FC = () => {
           </div>
         </Card>
       )}
+      <BottomBar />
     </div>
   );
 };
