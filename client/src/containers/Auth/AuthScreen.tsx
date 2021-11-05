@@ -7,6 +7,7 @@ import useStyles from './AuthScreenStyles';
 import roomDataStore from 'stores/RoomDataStore';
 
 import Logo from 'images/logo.png';
+import BottomBar from 'components/BottomBar/BottomBar';
 
 interface UserDataForm {
   username: string;
@@ -30,7 +31,7 @@ const AuthScreen: React.FC = () => {
           </Typography>
 
           <Typography className={classes.subTitle1} paragraph>
-            Private Chat room app
+            Create chat rooms on the fly and chat with others privately.
           </Typography>
         </div>
         <div className={classes.rightPortionCard}>
@@ -114,6 +115,7 @@ const AuthScreen: React.FC = () => {
             )}
           </Formik>
         </div>
+        <BottomBar />
       </Card>
     </div>
   );
