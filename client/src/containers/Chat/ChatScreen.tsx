@@ -35,6 +35,7 @@ const ChatScreen: React.FC = () => {
   const roomData = roomDataStore((state) => state);
 
   const [messages, setMessages] = useState<Message[]>([]);
+  const [showEmoji, setShowEmoji] = useState(false);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
 
@@ -79,7 +80,6 @@ const ChatScreen: React.FC = () => {
   }, [roomData.name]);
 
   const sendMessage = (userTypedMessage: string) => {
-    console.log(socket.id);
     if (!socket.connected) {
       socket.connect();
       socket.emit('join', { name: roomData.name, room: roomData.room });
@@ -118,7 +118,12 @@ const ChatScreen: React.FC = () => {
           </Button>
         </Card>
       ) : (
-        <Card className={classes.Card}>
+        <Card
+          className={classes.Card}
+          onClick={() => {
+            setShowEmoji(false);
+          }}
+        >
           <div className={classes.leftPortionOfCard}>
             <Typography className={classes.title}>
               Users in this chat room:
@@ -152,7 +157,11 @@ const ChatScreen: React.FC = () => {
             ) : (
               <React.Fragment>
                 <MessagePortion messages={messages} name={roomData.name} />
-                <MessageInputPortion submitChat={sendMessage} />
+                <MessageInputPortion
+                  submitChat={sendMessage}
+                  setShowEmoji={setShowEmoji}
+                  showEmoji={showEmoji}
+                />
               </React.Fragment>
             )}
           </div>

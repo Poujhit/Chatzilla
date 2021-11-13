@@ -96,7 +96,7 @@ const useChatScreenStyles = makeStyles(() => {
       backgroundColor: '#1D63DC',
       color: 'white',
       marginTop: '2%',
-      marginLeft: '5%',
+      marginLeft: '2%',
       marginBottom: '2%',
       marginRight: '5%',
       '&:hover': {
@@ -104,6 +104,15 @@ const useChatScreenStyles = makeStyles(() => {
         borderRadius: '20px',
         border: '2px solid #1D63DC',
       },
+    },
+    emojiButton: {
+      borderRadius: '20px',
+      // backgroundColor: '#1D63DC',
+      color: 'black',
+      border: '2px solid #1D63DC',
+      marginTop: '2%',
+      marginLeft: '5%',
+      marginBottom: '2%',
     },
     closeButton: {
       marginRight: '1rem',

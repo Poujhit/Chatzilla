@@ -14,17 +14,15 @@ const MessagePortion: React.FC<MessagePortionProps> = (props) => {
   const classes = useChatScreenStyles();
   return (
     <ScrollableFeed forceScroll={true} className={classes.MessagePortion}>
-      {
-        props.messages.map((eachmessage, index) => {
-          return (
-            <EachMessage
-              key={index}
-              message={eachmessage}
-              username={props.name}
-            />
-          );
-        }) as JSX.Element[]
-      }
+      {props.messages.map((eachmessage, index) => {
+        return (
+          <EachMessage
+            key={index}
+            message={eachmessage}
+            username={props.name}
+          />
+        );
+      })}
     </ScrollableFeed>
   );
 };
