@@ -66,7 +66,7 @@ const AuthScreen: React.FC = () => {
               roomData.setName(values.username);
               roomData.setRoom(values.roomname);
               actions.setSubmitting(false);
-              router.push(`/chat-room-${values.roomname}`);
+              router.push(`/chat-room/${values.roomname}`);
             }}
           >
             {({ isSubmitting, errors }) => (

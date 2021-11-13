@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <div className='App'>
         <Switch>
-          <Route path='/chat-room:roomname' component={ChatScreen} />
+          <Route path='/chat-room/:roomname' component={ChatScreen} />
           <Route path='/' exact component={AuthScreen} />
           <Redirect to='/' path='/' />
         </Switch>
