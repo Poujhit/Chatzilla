@@ -1,7 +1,7 @@
 {
   "name": "chatzilla",
-  "version": "1.1.0",
-  "description": "Private chat application",
+  "version": "1.2.0",
+  "description": "chatroom application that lets you chat with others on the fly",
   "scripts": {
     "start": "cd client && yarn start"
   },
@@ -14,6 +14,5 @@
   "bugs": {
     "url": "https://github.com/Poujhit/Chatzilla/issues"
   },
-  "homepage": "https://github.com/Poujhit/Chatzilla#readme",
-  "dependencies": {}
+  "homepage": "https://github.com/Poujhit/Chatzilla#readme"
 }
