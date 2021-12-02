@@ -6,6 +6,7 @@ type State = {
   room: string;
   setName: (name: string) => void;
   setRoom: (room: string) => void;
+  clearState: () => void;
 };
 
 const roomDataStore = create<State>(
@@ -29,6 +30,12 @@ const roomDataStore = create<State>(
           }),
           true
         ),
+      clearState: () =>
+        set((state) => ({
+          ...state,
+          name: '',
+          room: '',
+        })),
     }),
     {
       name: 'chatzilla-room-data',
