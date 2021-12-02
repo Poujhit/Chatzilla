@@ -1,7 +1,7 @@
 import { makeStyles, createStyles } from '@material-ui/core';
 import { CSSProperties } from 'react';
 
-const useChatScreenStyles = makeStyles(() => {
+const useChatScreenStyles = makeStyles(({ breakpoints }) => {
   const cardcontents: CSSProperties = {
     width: '50%',
     height: '100%',
@@ -27,11 +27,23 @@ const useChatScreenStyles = makeStyles(() => {
       backgroundColor: '#202442',
       display: 'flex',
       flexDirection: 'row',
+      [breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        height: '80%',
+        width: '70%',
+      },
+      [breakpoints.down('xs')]: {
+        height: '80%',
+        width: '80%',
+      },
     },
     leftPortionOfCard: {
       ...cardcontents,
       postion: 'fixed',
       backgroundColor: '#2b2f4b',
+      [breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
     ScrollingLeftPortion: {
       width: '100%',
@@ -39,26 +51,34 @@ const useChatScreenStyles = makeStyles(() => {
     chatPortion: {
       ...cardcontents,
       width: '60%',
+      [breakpoints.down('sm')]: {
+        width: '100%',
+      },
     },
     title: {
       fontFamily: 'Rubik, sans-serif',
-      color: 'white',
-      fontSize: '30px',
+      fontSize: '25px',
       fontWeight: 'bold',
       marginTop: '5%',
     },
     statusBarTitle: {
       fontFamily: 'Rubik, sans-serif',
       color: 'white',
+      margin: '5px 0px',
       marginLeft: '1em',
-      fontSize: '1.5rem',
+      fontSize: '1.4rem',
       fontWeight: 'bold',
+      [breakpoints.up(1050)]: {
+        fontSize: '1.3rem',
+      },
+      [breakpoints.down('xs')]: {
+        fontSize: '1rem',
+      },
     },
     subTitle: {
       fontFamily: 'Rubik, sans-serif',
       fontSize: '20px',
       marginBottom: '25px',
-      color: 'black',
     },
     MessageInputPortion: {
       height: '10%',
@@ -114,11 +134,19 @@ const useChatScreenStyles = makeStyles(() => {
     closeButton: {
       marginRight: '1rem',
       color: 'white',
-      fontSize: '1em',
       borderRadius: '18px',
       '&:hover': {
         borderRadius: '20px',
       },
+    },
+    userModalPopover: {
+      height: '50vh',
+      backgroundColor: '#2b2f4b',
+      paddingLeft: '20px',
+      paddingRight: '20px',
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column',
     },
   });
 });

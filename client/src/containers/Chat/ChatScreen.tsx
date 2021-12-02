@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import io, { Socket } from 'socket.io-client';
-import { Button, Card, CircularProgress, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CircularProgress,
+  Typography,
+  Popover,
+  useTheme,
+  useMediaQuery,
+} from '@material-ui/core';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 import UserList from './UsersList';
@@ -38,8 +46,21 @@ const ChatScreen: React.FC = () => {
   const [showEmoji, setShowEmoji] = useState(false);
   const [users, setUsers] = useState<User>();
   const [isLoading, setLoading] = useState(true);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const history = useHistory();
+  const theme = useTheme();
+  const match = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     socket = io(process.env.REACT_APP_SERVER_URL as string, {
@@ -136,6 +157,38 @@ const ChatScreen: React.FC = () => {
                 {`${roomData.room} chat room`}
               </Typography>
               <br />
+              {match && (
+                <>
+                  <Button
+                    className={classes.closeButton}
+                    style={{ marginRight: '0em' }}
+                    onClick={handleClick}
+                  >
+                    Info
+                  </Button>
+                  <Popover
+                    id={Boolean(anchorEl) ? 'simple-popover' : undefined}
+                    open={Boolean(anchorEl)}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'center',
+                    }}
+                  >
+                    <div className={classes.userModalPopover}>
+                      <Typography className={classes.title}>
+                        Users in this chat room:
+                      </Typography>
+                      <UserList users={users} />
+                    </div>
+                  </Popover>
+                </>
+              )}
               <Button
                 className={classes.closeButton}
                 onClick={() => {
