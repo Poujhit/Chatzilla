@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Card, TextField, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 
@@ -18,6 +25,8 @@ const AuthScreen: React.FC = () => {
   const classes = useStyles();
   const router = useHistory();
   const roomData = roomDataStore((state) => state);
+  const theme = useTheme();
+  const match = useMediaQuery(theme.breakpoints.down('sm'));
 
   const initialSignInValues: UserDataForm = { username: '', roomname: '' };
 
@@ -35,10 +44,15 @@ const AuthScreen: React.FC = () => {
           </Typography>
         </div>
         <div className={classes.rightPortionCard}>
+          {match && (
+            <Typography className={classes.title} paragraph>
+              Chatzilla
+            </Typography>
+          )}
           <Typography
             className={classes.subTitle}
             style={{
-              marginTop: '50px',
+              marginTop: match ? '20px' : '50px',
             }}
             paragraph
           >

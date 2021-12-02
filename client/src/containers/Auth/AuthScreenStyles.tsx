@@ -1,7 +1,16 @@
 import { makeStyles, createStyles } from '@material-ui/core';
 import { CSSProperties } from 'react';
 
-const useStyles = makeStyles(() => {
+/*
+How breakpoints work
+
+value         |0px     600px    960px    1280px   1920px
+key           |xs      sm       md       lg       xl
+screen width  |--------|--------|--------|--------|-------->
+range         |   xs   |   sm   |   md   |   lg   |   xl
+*/
+
+const useStyles = makeStyles(({ breakpoints }) => {
   const cardcontents: CSSProperties = {
     width: '50%',
     height: '100%',
@@ -31,26 +40,48 @@ const useStyles = makeStyles(() => {
       display: 'flex',
       borderRadius: '16px',
       flexDirection: 'row',
+      [breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        height: '80%',
+        width: '70%',
+      },
+      [breakpoints.down('xs')]: {
+        height: '80%',
+        width: '80%',
+      },
     },
     leftPortionCard: {
       ...cardcontents,
       backgroundColor: '#263C7E',
+      [breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
     rightPortionCard: {
       ...cardcontents,
       backgroundColor: '#25294a',
+      [breakpoints.down('sm')]: {
+        width: '100%',
+      },
     },
     title: {
       fontFamily: 'Rubik, sans-serif',
       fontSize: '50px',
       fontWeight: 'bold',
       marginTop: '4%',
+
+      [breakpoints.down(295)]: {
+        fontSize: '30px',
+      },
     },
     subTitle: {
       fontFamily: 'Rubik, sans-serif',
       fontSize: '25px',
       padding: '15px',
       fontWeight: 'bold',
+      [breakpoints.down(295)]: {
+        fontSize: '20px',
+      },
     },
     subTitle1: {
       fontFamily: 'Rubik, sans-serif',
