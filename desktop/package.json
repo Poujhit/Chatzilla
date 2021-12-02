@@ -1,6 +1,6 @@
 {
   "name": "chatzilla-desktop",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Chatzila desktop app",
   "main": "./dist/index.js",
   "scripts": {
