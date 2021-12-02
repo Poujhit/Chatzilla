@@ -2,15 +2,15 @@ export const scrollBarStyle = () => ({
   '@global': {
     '*::-webkit-scrollbar': {
       width: '10px',
-      color: '#ffffff',
     },
     '*::-webkit-scrollbar-track': {
       background: 'transparent',
     },
     '*::-webkit-scrollbar-thumb': {
-      background: 'transparent',
+      background: '#C2C0C0',
+      'border-radius': '10px',
       '&:hover': {
-        background: '#4A4A4A',
+        background: '#7C7A7A',
       },
     },
   },
