@@ -38,7 +38,6 @@ const AuthScreen: React.FC = () => {
           <Typography
             className={classes.subTitle}
             style={{
-              color: 'black',
               marginTop: '50px',
             }}
             paragraph
@@ -55,9 +54,9 @@ const AuthScreen: React.FC = () => {
               const errors: Record<string, string> = {};
 
               if (values.username.length <= 6)
-                errors.username = 'User name should be more that 6 characters.';
+                errors.username = 'User name should be more that 6 characters';
               if (values.roomname.length === 0)
-                errors.room = 'Room name should not be empty.';
+                errors.roomname = 'Room name should not be empty';
 
               return errors;
             }}
