@@ -1,25 +1,25 @@
 {
-	"short_name": "ChatZilla",
-	"name": "A Private chat app using React and Nodejs.",
-	"icons": [
-		{
-			"src": "icon.png",
-			"sizes": "64x64 32x32 24x24 16x16",
-			"type": "image/png"
-		},
-		{
-			"src": "logo192.png",
-			"type": "image/png",
-			"sizes": "256x256"
-		},
-		{
-			"src": "logo512.png",
-			"type": "image/png",
-			"sizes": "512x512"
-		}
-	],
-	"start_url": ".",
-	"display": "standalone",
-	"theme_color": "#000000",
-	"background_color": "#ffffff"
+  "short_name": "Chatzilla",
+  "name": "A chatroom application that lets you chat with someone on the fly.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }

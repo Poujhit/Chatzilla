@@ -1,18 +1,18 @@
-# ChatZilla
+# Chatzilla
 
 <p>
 <img src="./client/public/icon.png"/>
 </p>
 
-A Private Chat Room Application made using React/Typescript and NodeJs.\
-Try out [here](https://chatzilla-private-chat.web.app/).
+Chat Room Application made using React/Typescript and NodeJs-Web sockets.\
+Try out [here](https://chatzilla-web.netlify.app).
 
 ## Features
 
 - Users can create chat rooms on the go.
-- Simple login process.
+- Simple room creation process.
 - All your chats are not stored anywhere. Even the chat rooms are not stored anywhere.
-- All your conversations are private and unauthorized users can't access it.
+- Connection is persisted using websockets and easy reconnection if connection is lost due to any issues.
 
 ## About Me
 
@@ -20,4 +20,4 @@ To See my Other Projects
 
 - [My Github Profile](https://github.com/Poujhit)
 
-Drop a ⭐ if you liked this Project. Any issues do report. Suggestions are Welcomed.😁
+Drop a ⭐ if you liked this Project. Any issues do report. Suggestions are Welcomed.
