@@ -2,11 +2,30 @@ import React from 'react';
 
 import eachMessageStyles from './EachMessageStyles';
 import { Message } from 'containers/Chat/ChatScreen';
+import Linkify from 'react-linkify';
 
 interface EachMessageProps {
   message: Message;
   username: string;
 }
+
+const LinkifyWrapper: React.FC = ({ children }) => (
+  <Linkify
+    componentDecorator={(decoratedHref, decoratedText, key) => (
+      <a
+        target='_blank'
+        style={{ color: 'white' }}
+        href={decoratedHref}
+        key={key}
+        rel='noreferrer'
+      >
+        {decoratedText}
+      </a>
+    )}
+  >
+    {children}
+  </Linkify>
+);
 
 const EachMessage: React.FC<EachMessageProps> = (props) => {
   const classes = eachMessageStyles();
@@ -28,7 +47,9 @@ const EachMessage: React.FC<EachMessageProps> = (props) => {
       >
         <p className={classes.userNameText}>{props.message.user}</p>
         <div className={classes.myMessageTextBox}>
-          <p className={classes.messageText}>{props.message.text}</p>
+          <p className={classes.messageText}>
+            <LinkifyWrapper>{props.message.text}</LinkifyWrapper>
+          </p>
         </div>
       </div>
     );
@@ -47,7 +68,9 @@ const EachMessage: React.FC<EachMessageProps> = (props) => {
               backgroundColor: '#2263A5',
             }}
           >
-            <p className={classes.messageText}>{props.message.text}</p>
+            <p className={classes.messageText}>
+              <LinkifyWrapper>{props.message.text}</LinkifyWrapper>
+            </p>
           </div>
         </div>
       );
