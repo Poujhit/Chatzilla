@@ -98,6 +98,7 @@ const ChatScreen: React.FC = () => {
             height: '30%',
             flexDirection: 'column',
             alignItems: 'center',
+            borderRadius: '16px',
           }}
         >
           <Typography
@@ -105,7 +106,6 @@ const ChatScreen: React.FC = () => {
               fontFamily: 'Rubik',
               fontWeight: 'bold',
               fontSize: '20px',
-              color: 'darkblue',
             }}
           >
             You are not authenticated. Go to the home page to login.
@@ -140,10 +140,11 @@ const ChatScreen: React.FC = () => {
                 className={classes.closeButton}
                 onClick={() => {
                   socket.disconnect();
+                  roomData.clearState();
                   history.replace('/');
                 }}
               >
-                X
+                Close
               </Button>
             </div>
             {isLoading ? (

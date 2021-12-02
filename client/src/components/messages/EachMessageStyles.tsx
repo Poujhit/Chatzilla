@@ -9,18 +9,15 @@ const eachMessageStyles = makeStyles(() =>
       marginLeft: '10px',
     },
     myMessageTextBox: {
-      backgroundColor: '#032470',
-
+      backgroundColor: '#406ae0',
       borderRadius: '20px',
       padding: '5px 20px',
-      color: 'white',
       maxWidth: '70%',
     },
     otherMessageTextBox: {
-      backgroundColor: '#0656D9',
+      backgroundColor: '#272A47',
       borderRadius: '20px',
       padding: '5px 20px',
-      color: 'white',
       display: 'inline-block',
       maxWidth: '80%',
     },
@@ -34,7 +31,6 @@ const eachMessageStyles = makeStyles(() =>
     messageText: {
       width: '100%',
       fontFamily: 'Rubik, sans-serif',
-
       letterSpacing: '0',
       float: 'left',
       fontSize: '0.9em',

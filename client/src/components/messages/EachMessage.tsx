@@ -23,6 +23,7 @@ const EachMessage: React.FC<EachMessageProps> = (props) => {
         className={classes.myMessageContainer}
         style={{
           justifyContent: 'flex-end',
+          marginRight: '10px',
         }}
       >
         <p className={classes.userNameText}>{props.message.user}</p>
@@ -56,6 +57,7 @@ const EachMessage: React.FC<EachMessageProps> = (props) => {
           className={classes.myMessageContainer}
           style={{
             justifyContent: 'flex-start',
+            marginLeft: '10px',
           }}
         >
           <div className={classes.otherMessageTextBox}>
