@@ -21,8 +21,8 @@ const useStyles = makeStyles(() => {
       justifyContent: 'center',
     },
     Image: {
-      height: '100px',
-      width: '95px',
+      height: '85px',
+      width: '85px',
       marginTop: '70px',
     },
     Card: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => {
     },
     leftPortionCard: {
       ...cardcontents,
-      backgroundColor: '#344fa2',
+      backgroundColor: '#263C7E',
     },
     rightPortionCard: {
       ...cardcontents,
