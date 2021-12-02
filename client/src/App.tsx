@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, withStyles } from '@material-ui/core';
 
 import AuthScreen from 'containers/Auth/AuthScreen';
 import ChatScreen from 'containers/Chat/ChatScreen';
 
 import { theme } from 'theme/Theme';
+import { scrollBarStyle } from 'theme/ScrollbarStyles';
 
 import './App.css';
 
@@ -25,4 +26,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default withStyles(scrollBarStyle)(App);
