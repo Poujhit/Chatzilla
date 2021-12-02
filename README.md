@@ -14,7 +14,7 @@ Try out [here](https://chatzilla-web.netlify.app).
 - All your chats are not stored anywhere. Even the chat rooms are not stored anywhere.
 - Connection is persisted using websockets and easy reconnection if connection is lost due to any issues.
 
-## About Me
+## About
 
 To See my Other Projects
 
