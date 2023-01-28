@@ -11,7 +11,7 @@ interface UserListProps {
 const UserList: React.FC<UserListProps> = (props) => {
   const { classes } = useChatScreenStyles();
   return (
-    <ScrollableFeed className={classes.ScrollingLeftPortion}>
+    <div className={classes.ScrollingLeftPortion}>
       {props.users
         ? props.users.users.map((eachUser) => {
             return (
@@ -20,8 +20,8 @@ const UserList: React.FC<UserListProps> = (props) => {
               </li>
             );
           })
-        : null}
-    </ScrollableFeed>
+        : undefined}
+    </div>
   );
 };
 

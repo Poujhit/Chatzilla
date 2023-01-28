@@ -23,6 +23,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  console.log(process.env.REACT_APP_SERVER_URL);
   return (
     <div className='App'>
       <ThemeProvider theme={theme}>

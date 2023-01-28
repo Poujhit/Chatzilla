@@ -13,7 +13,7 @@ interface MessagePortionProps {
 const MessagePortion: React.FC<MessagePortionProps> = (props) => {
   const { classes } = useChatScreenStyles();
   return (
-    <ScrollableFeed forceScroll={true} className={classes.MessagePortion}>
+    <div className={classes.MessagePortion}>
       {props.messages.map((eachmessage, index) => {
         return (
           <EachMessage
@@ -23,7 +23,7 @@ const MessagePortion: React.FC<MessagePortionProps> = (props) => {
           />
         );
       })}
-    </ScrollableFeed>
+    </div>
   );
 };
 

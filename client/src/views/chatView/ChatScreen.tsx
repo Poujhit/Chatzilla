@@ -62,7 +62,7 @@ const ChatScreen: React.FC = () => {
   const match = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
-    socket = io(process.env.REACT_APP_SERVER_URL as string, {
+    socket = io('http://localhost:8080', {
       autoConnect: true,
       reconnection: false,
       reconnectionAttempts: 0,

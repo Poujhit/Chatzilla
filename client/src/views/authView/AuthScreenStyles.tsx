@@ -97,6 +97,7 @@ const useStyles = makeStyles()(({ breakpoints }) => ({
     borderRadius: '20px',
     backgroundColor: '#406ae0',
     width: '40%',
+    color: 'white',
     marginTop: '15px',
     height: '50px',
     alignSelf: 'center',
