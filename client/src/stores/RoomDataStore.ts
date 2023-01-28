@@ -1,5 +1,5 @@
-import create from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create, StateCreator } from 'zustand';
+import { persist, PersistOptions } from 'zustand/middleware';
 
 type State = {
   name: string;
@@ -9,8 +9,13 @@ type State = {
   clearState: () => void;
 };
 
+type MyPersist = (
+  config: StateCreator<State>,
+  options: PersistOptions<State>
+) => StateCreator<State>;
+
 const roomDataStore = create<State>(
-  persist(
+  (persist as MyPersist)(
     (set) => ({
       name: '',
       room: '',
