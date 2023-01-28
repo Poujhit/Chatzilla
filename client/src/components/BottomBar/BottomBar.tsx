@@ -2,7 +2,7 @@ import React from 'react';
 
 interface BottomBarProps {}
 
-const BottomBar: React.FC<BottomBarProps> = (props) => {
+const BottomBar: React.FC<BottomBarProps> = () => {
   return (
     <div
       style={{

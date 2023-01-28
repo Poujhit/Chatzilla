@@ -1,29 +1,31 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { ThemeProvider, withStyles } from '@material-ui/core';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import AuthScreen from 'containers/Auth/AuthScreen';
-import ChatScreen from 'containers/Chat/ChatScreen';
-
-import { theme } from 'theme/Theme';
-import { scrollBarStyle } from 'theme/ScrollbarStyles';
+import AuthScreen from './views/authView/AuthScreen';
+import ChatScreen from './views/chatView/ChatScreen';
 
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <div className='App'>
-          <Switch>
-            <Route path='/chat-room/:roomname' component={ChatScreen} />
-            <Route path='/' exact component={AuthScreen} />
-            <Redirect to='/' path='/' />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AuthScreen />,
+  },
+  {
+    path: '/chat-room/:roomname',
+    element: <ChatScreen />,
+  },
+  {
+    path: '*',
+    element: <AuthScreen />,
+  },
+]);
 
-export default withStyles(scrollBarStyle)(App);
+function App() {
+  return (
+    <div className='App'>
+      <RouterProvider router={router} />
+    </div>
+  );
+}
+
+export default App;
