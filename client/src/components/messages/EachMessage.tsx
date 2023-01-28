@@ -29,7 +29,7 @@ const LinkifyWrapper: React.FC<PropsWithChildren> = ({ children }) => (
 );
 
 const EachMessage: React.FC<EachMessageProps> = (props) => {
-  const classes = eachMessageStyles();
+  const { classes } = eachMessageStyles();
   let isSentByCurrentUser = false;
   const trimmedName = props.username.trim().toLowerCase();
 
