@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
 
 import AuthScreen from './views/authView/AuthScreen';
 import ChatScreen from './views/chatView/ChatScreen';
+import { theme } from 'theme/Theme';
 
 import './App.css';
 
@@ -23,7 +25,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className='App'>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </div>
   );
 }
