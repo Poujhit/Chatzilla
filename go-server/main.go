@@ -29,15 +29,19 @@ func main() {
 	})
 
 	server.OnConnect("/", func(s socketio.Conn) error {
-		s.SetContext("")
+		// s.SetContext("")
 
 		fmt.Println("connected:", s.ID())
+
+		// fmt.Println(s.Rooms())
+
+		// s.
 		return nil
 	})
 
 	server.OnEvent("/", "join", func(s socketio.Conn, msg map[string]string) {
-		s.SetContext(msg)
-
+		// s.SetContext(msg)
+		fmt.Println("here")
 		fmt.Println("msg:", msg)
 
 		// s.Emit("reply", "have "+msg)
