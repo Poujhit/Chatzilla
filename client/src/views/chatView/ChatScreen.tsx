@@ -67,6 +67,7 @@ const ChatScreen: React.FC = () => {
       reconnection: false,
       reconnectionAttempts: 0,
       transports: ['websocket'],
+      path: '/ws',
     });
   }, []);
 
