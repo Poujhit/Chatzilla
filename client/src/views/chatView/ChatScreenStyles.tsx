@@ -40,6 +40,7 @@ const useChatScreenStyles = makeStyles()(({ breakpoints }) => ({
     ...cardcontents,
     postion: 'fixed',
     backgroundColor: '#2b2f4b',
+    border: '1px solid #050934',
     [breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -151,10 +152,5 @@ const useChatScreenStyles = makeStyles()(({ breakpoints }) => ({
     flexDirection: 'column',
   },
 }));
-
-// const useChatScreenStyles = makeStyles(({ breakpoints }) => {
-
-//   return createStyles();
-// });
 
 export default useChatScreenStyles;

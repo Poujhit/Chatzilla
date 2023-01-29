@@ -1,8 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { TextField, Button, Tooltip } from '@mui/material';
-import data from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
+import EmojiPicker, { EmojiClickData, Theme } from 'emoji-picker-react';
+
 // import 'emoji-mart/css/emoji-mart.css';
 
 import useChatScreenStyles from './ChatScreenStyles';
@@ -76,20 +76,10 @@ const MessageInputPortion: React.FC<MessageInputPortionProps> = ({
               send
             </Button>
             {showEmoji && (
-              <Picker
-                data={data}
-                style={{
-                  position: 'absolute',
-                  bottom: '18%',
-                  right: '10%',
-                }}
-                title='Pick emoji'
-                emoji='v'
-                theme='dark'
-                sheetSize={32}
-                exclude={['flags']}
-                onSelect={(emoji: any) =>
-                  setFieldValue('message', values.message + emoji.native)
+              <EmojiPicker
+                theme={Theme.DARK}
+                onEmojiClick={(emojiData: EmojiClickData) =>
+                  setFieldValue('message', values.message + emojiData.emoji)
                 }
               />
             )}
