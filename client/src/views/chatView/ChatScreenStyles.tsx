@@ -95,8 +95,10 @@ const useChatScreenStyles = makeStyles()(({ breakpoints }) => ({
     justifyContent: 'space-between',
   },
   MessagePortion: {
-    height: '88%',
+    height: '100%',
     width: '100%',
+    marginBottom: '8px',
+    overflowY: 'scroll',
   },
   FormPortion: {
     display: 'flex',
@@ -116,6 +118,7 @@ const useChatScreenStyles = makeStyles()(({ breakpoints }) => ({
     backgroundColor: '#406ae0',
     marginTop: '2%',
     marginLeft: '2%',
+    color: 'white',
     marginBottom: '2%',
     marginRight: '5%',
     '&:hover': {

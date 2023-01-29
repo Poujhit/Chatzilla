@@ -50,6 +50,7 @@ const MessageInputPortion: React.FC<MessageInputPortionProps> = ({
               type='input'
               name='message'
               fullWidth
+              variant='standard'
               autoFocus={true}
               error={!!errors.message}
               helperText={errors.message}
