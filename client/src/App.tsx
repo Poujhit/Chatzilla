@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
 import AuthScreen from './views/authView/AuthScreen';
@@ -18,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <AuthScreen />,
+    element: <Navigate replace to='/' />,
   },
 ]);
 
