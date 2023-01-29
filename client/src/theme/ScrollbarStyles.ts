@@ -7,7 +7,7 @@ export const scrollBarStyle = () => ({
   },
   '*::-webkit-scrollbar-thumb': {
     background: '#C2C0C0',
-    'border-radius': '10px',
+    borderRadius: '10px',
     '&:hover': {
       background: '#7C7A7A',
     },
