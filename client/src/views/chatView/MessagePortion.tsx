@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import ScrollableFeed from 'components/ScrollableContainer/ScrollableContainer';
 
 import { Message } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import ScrollableFeed from 'components/ScrollableContainer/ScrollableContainer';
 
 import { User } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';
@@ -18,7 +17,7 @@ const UserList: React.FC<UserListProps> = (props) => {
       delay: 0,
       ignoreCancelEvents: true,
     });
-  }, props.users?.users);
+  }, [props.users?.users]);
   const { classes } = useChatScreenStyles();
   return (
     <div id='userlist' className={classes.ScrollingLeftPortion}>
