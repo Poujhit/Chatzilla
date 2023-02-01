@@ -3,10 +3,12 @@ package main
 import (
 	"chatzilla-server/helpers"
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/joho/godotenv"
 	"github.com/zishang520/engine.io/types"
 	"github.com/zishang520/socket.io/socket"
 )
@@ -16,10 +18,15 @@ import (
 // .broadcast.to msg is sent to all clients in a room except the one client that sends this broadcasted msg.
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	ops := socket.DefaultServerOptions()
 	ops.SetAllowEIO3(true)
 	ops.SetCors(&types.Cors{
-		Origin: "http://localhost:3000",
+		Origin: os.Getenv("ORIGIN"),
 		// Credentials: true,
 	})
 	httpServer := types.CreateServer(nil)
@@ -86,8 +93,10 @@ func main() {
 		})
 	})
 
-	httpServer.Listen("127.0.0.1:8080", func() {
-		fmt.Println("listening now")
+	url := fmt.Sprintf("127.0.0.1:%s", os.Getenv("PORT"))
+
+	httpServer.Listen(url, func() {
+		fmt.Printf("listening on url %s", url)
 	})
 
 	exit := make(chan struct{})
