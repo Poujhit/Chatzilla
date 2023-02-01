@@ -14,7 +14,7 @@ const clientQuery = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <QueryClientProvider client={clientQuery}>
     <CssBaseline />
-    <GlobalStyles styles={scrollBarStyle} />
+    <GlobalStyles styles={scrollBarStyle as any} />
     <App />
   </QueryClientProvider>
 );
