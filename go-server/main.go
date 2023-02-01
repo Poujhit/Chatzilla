@@ -90,6 +90,18 @@ func main() {
 			client.Broadcast().To(socket.Room(user["room"])).Emit("message", sendingMsg)
 		})
 		client.On("disconnect", func(...any) {
+			user := helpers.RemoveUser(string(client.Id()))
+			if user != nil {
+				fmt.Println(user)
+				client.Broadcast().To(socket.Room(user["room"])).Emit("message", map[string]string{
+					"user": "Admin",
+					"text": fmt.Sprintf("%s has left", user["name"]),
+				})
+				client.Broadcast().To(socket.Room(user["room"])).Emit("roomData", map[string]interface{}{
+					"room":  user["room"],
+					"users": helpers.GetUsersInRoom(user["room"]),
+				})
+			}
 		})
 	})
 
