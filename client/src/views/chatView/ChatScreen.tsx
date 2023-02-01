@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import io, { Socket } from 'socket.io-client';
 import {
   Button,
@@ -9,8 +9,7 @@ import {
   Popover,
   useTheme,
   useMediaQuery,
-} from '@material-ui/core';
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
+} from '@mui/material';
 
 import UserList from './UsersList';
 import MessagePortion from './MessagePortion';
@@ -19,7 +18,7 @@ import MessageInputPortion from './MessageInputPortion';
 import roomDataStore from 'stores/RoomDataStore';
 import BottomBar from 'components/BottomBar/BottomBar';
 
-let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+let socket: Socket;
 
 export type Message = {
   user: string;
@@ -38,7 +37,7 @@ export type User = {
 };
 
 const ChatScreen: React.FC = () => {
-  const classes = useChatScreenStyles();
+  const { classes } = useChatScreenStyles();
 
   const roomData = roomDataStore((state) => state);
 
@@ -58,16 +57,17 @@ const ChatScreen: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const theme = useTheme();
   const match = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
-    socket = io(process.env.REACT_APP_SERVER_URL as string, {
+    socket = io(import.meta.env.VITE_SERVER_URL, {
       autoConnect: true,
       reconnection: false,
       reconnectionAttempts: 0,
       transports: ['websocket'],
+      path: '/socket.io/',
     });
   }, []);
 
@@ -133,7 +133,7 @@ const ChatScreen: React.FC = () => {
           </Typography>
           <Button
             className={classes.sendButton}
-            onClick={() => history.replace('/')}
+            onClick={() => navigate('/', { replace: true })}
           >
             Ok
           </Button>
@@ -194,7 +194,7 @@ const ChatScreen: React.FC = () => {
                 onClick={() => {
                   socket.disconnect();
                   roomData.clearState();
-                  history.replace('/');
+                  navigate('/', { replace: true });
                 }}
               >
                 Close

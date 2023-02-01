@@ -1,9 +1,10 @@
-import React from 'react';
-import ScrollableFeed from 'react-scrollable-feed';
+import React, { useEffect } from 'react';
 
 import { Message } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';
 import EachMessage from 'components/messages/EachMessage';
+
+import { animateScroll as scroll } from 'react-scroll';
 
 interface MessagePortionProps {
   messages: Message[];
@@ -11,9 +12,18 @@ interface MessagePortionProps {
 }
 
 const MessagePortion: React.FC<MessagePortionProps> = (props) => {
-  const classes = useChatScreenStyles();
+  const { classes } = useChatScreenStyles();
+
+  useEffect(() => {
+    scroll.scrollToBottom({
+      containerId: 'message-portion',
+      duration: 200,
+      delay: 0,
+      ignoreCancelEvents: true,
+    });
+  }, [props.messages]);
   return (
-    <ScrollableFeed forceScroll={true} className={classes.MessagePortion}>
+    <div id='message-portion' className={classes.MessagePortion}>
       {props.messages.map((eachmessage, index) => {
         return (
           <EachMessage
@@ -23,7 +33,7 @@ const MessagePortion: React.FC<MessagePortionProps> = (props) => {
           />
         );
       })}
-    </ScrollableFeed>
+    </div>
   );
 };
 

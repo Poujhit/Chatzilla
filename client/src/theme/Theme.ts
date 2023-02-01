@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core';
+import { createTheme } from '@mui/material';
 
 export const theme = createTheme({
   typography: {
@@ -6,7 +6,7 @@ export const theme = createTheme({
   },
 
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       main: '#6586e6',
     },

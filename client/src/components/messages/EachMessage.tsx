@@ -1,15 +1,16 @@
 import React from 'react';
 
 import eachMessageStyles from './EachMessageStyles';
-import { Message } from 'containers/Chat/ChatScreen';
+import { Message } from 'views/chatView/ChatScreen';
 import Linkify from 'react-linkify';
+import { PropsWithChildren } from 'react';
 
 interface EachMessageProps {
   message: Message;
   username: string;
 }
 
-const LinkifyWrapper: React.FC = ({ children }) => (
+const LinkifyWrapper: React.FC<PropsWithChildren> = ({ children }) => (
   <Linkify
     componentDecorator={(decoratedHref, decoratedText, key) => (
       <a
@@ -28,7 +29,7 @@ const LinkifyWrapper: React.FC = ({ children }) => (
 );
 
 const EachMessage: React.FC<EachMessageProps> = (props) => {
-  const classes = eachMessageStyles();
+  const { classes } = eachMessageStyles();
   let isSentByCurrentUser = false;
   const trimmedName = props.username.trim().toLowerCase();
 

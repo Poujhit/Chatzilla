@@ -6,9 +6,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './AuthScreenStyles';
 import roomDataStore from 'stores/RoomDataStore';
@@ -22,8 +22,8 @@ interface UserDataForm {
 }
 
 const AuthScreen: React.FC = () => {
-  const classes = useStyles();
-  const router = useHistory();
+  const { classes } = useStyles();
+  const navigate = useNavigate();
   const roomData = roomDataStore((state) => state);
   const theme = useTheme();
   const match = useMediaQuery(theme.breakpoints.down('sm'));
@@ -79,7 +79,7 @@ const AuthScreen: React.FC = () => {
               roomData.setName(values.username);
               roomData.setRoom(values.roomname);
               actions.setSubmitting(false);
-              router.push(`/chat-room/${values.roomname}`);
+              navigate(`/chat-room/${values.roomname}`);
             }}
           >
             {({ isSubmitting, errors }) => (

@@ -1,17 +1,26 @@
-import React from 'react';
-import ScrollableFeed from 'react-scrollable-feed';
+import React, { useEffect } from 'react';
 
 import { User } from './ChatScreen';
 import useChatScreenStyles from './ChatScreenStyles';
+
+import { animateScroll as scroll } from 'react-scroll';
 
 interface UserListProps {
   users: User | undefined;
 }
 
 const UserList: React.FC<UserListProps> = (props) => {
-  const classes = useChatScreenStyles();
+  useEffect(() => {
+    scroll.scrollToBottom({
+      containerId: 'userlist',
+      duration: 200,
+      delay: 0,
+      ignoreCancelEvents: true,
+    });
+  }, [props.users?.users]);
+  const { classes } = useChatScreenStyles();
   return (
-    <ScrollableFeed className={classes.ScrollingLeftPortion}>
+    <div id='userlist' className={classes.ScrollingLeftPortion}>
       {props.users
         ? props.users.users.map((eachUser) => {
             return (
@@ -20,8 +29,8 @@ const UserList: React.FC<UserListProps> = (props) => {
               </li>
             );
           })
-        : null}
-    </ScrollableFeed>
+        : undefined}
+    </div>
   );
 };
 

@@ -1,12 +1,10 @@
 import React from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 interface PopUpDialogProps {
   open: boolean;
@@ -18,30 +16,25 @@ interface PopUpDialogProps {
   notOkButtonText: string;
 }
 
-const PopUpDialog: React.FC<PopUpDialogProps> = (props) => {
+const AlertDialog: React.FC<PopUpDialogProps> = (props) => {
   return (
-    <Dialog
-      open={props.open}
-      onClose={props.onClose}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
-    >
-      <DialogTitle id='alert-dialog-title'>{props.title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id='alert-dialog-description'>
-          {props.content}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={props.onClose} color='primary'>
-          {props.notOkButtonText}
-        </Button>
-        <Button onClick={props.onOkHandled} color='primary' autoFocus>
-          {props.okButtonText}
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <div>
+      <Dialog open={props.open} onClose={props.onClose}>
+        <DialogTitle id='alert-dialog-title'>{props.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            {props.content}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={props.onClose}> {props.notOkButtonText}</Button>
+          <Button onClick={props.onOkHandled} autoFocus>
+            {props.okButtonText}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 
-export default PopUpDialog;
+export default AlertDialog;
