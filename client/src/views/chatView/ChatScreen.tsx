@@ -69,7 +69,6 @@ const ChatScreen: React.FC = () => {
       transports: ['websocket'],
       path: '/socket.io/',
     });
-    socket.emit('join', { name: roomData.name, room: roomData.room });
   }, []);
 
   useEffect(() => {
