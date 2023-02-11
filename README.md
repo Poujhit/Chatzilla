@@ -4,7 +4,7 @@
 <img src="./client/public/icon.png"/>
 </p>
 
-Chat Room Application made using React/Typescript and NodeJs-Web sockets.\
+Chat Room Application made using React/Typescript and Go implementation of socket.io engine.\
 Try out [here](https://chatzilla-web.netlify.app).
 
 ## Features
