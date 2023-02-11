@@ -18,7 +18,7 @@ import (
 
 func main() {
 	// Change to .env to run the code locally
-	viper.SetConfigFile("ENV")
+	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	viper.AutomaticEnv()
 
