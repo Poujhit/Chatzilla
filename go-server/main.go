@@ -3,12 +3,11 @@ package main
 import (
 	"chatzilla-server/helpers"
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/joho/godotenv"
+	"github.com/spf13/viper"
 	"github.com/zishang520/engine.io/types"
 	"github.com/zishang520/socket.io/socket"
 )
@@ -18,15 +17,15 @@ import (
 // .broadcast.to msg is sent to all clients in a room except the one client that sends this broadcasted msg.
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// Change to .env to run the code locally
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
+	viper.AutomaticEnv()
 
 	ops := socket.DefaultServerOptions()
 	ops.SetAllowEIO3(true)
 	ops.SetCors(&types.Cors{
-		Origin: os.Getenv("ORIGIN"),
+		Origin: viper.Get("ORIGIN"),
 		// Credentials: true,
 	})
 	httpServer := types.CreateServer(nil)
@@ -105,7 +104,7 @@ func main() {
 		})
 	})
 
-	url := fmt.Sprintf("127.0.0.1:%s", os.Getenv("PORT"))
+	url := fmt.Sprintf("127.0.0.1:%s", viper.Get("PORT"))
 
 	httpServer.Listen(url, func() {
 		fmt.Printf("listening on url %s", url)
