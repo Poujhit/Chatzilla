@@ -1,7 +1,7 @@
 {
   "name": "go-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Running go server using nodemon",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec go run main.go --signal SIGTERM"
