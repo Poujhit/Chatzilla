@@ -1,9 +1,9 @@
 {
   "name": "chatzilla",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "chatroom application that lets you chat with others on the fly",
   "scripts": {
-    "start": "cd client && yarn start"
+    "start": "cd client && npm run dev"
   },
   "repository": {
     "type": "git",
