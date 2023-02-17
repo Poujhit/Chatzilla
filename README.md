@@ -5,7 +5,7 @@
 </p>
 
 Chat Room Application made using React/Typescript and Go implementation of socket.io engine.\
-Try out [here](https://chatzilla-web.netlify.app).
+Try out [here](https://chatzillla.vercel.app).
 
 ## Features
 
@@ -13,6 +13,7 @@ Try out [here](https://chatzilla-web.netlify.app).
 - Simple room creation process.
 - All your chats are not stored anywhere. Even the chat rooms are not stored anywhere.
 - Connection is persisted using websockets and easy reconnection if connection is lost due to any issues.
+- Relaibility and speed of Golang
 
 ## About
 
