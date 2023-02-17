@@ -17,7 +17,6 @@ import (
 // .broadcast.to msg is sent to all clients in a room except the one client that sends this broadcasted msg.
 
 func main() {
-	// Change to .env to run the code locally
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	viper.AutomaticEnv()
