@@ -18,7 +18,7 @@ import (
 
 func main() {
 	// Change to .env to run the code locally
-	viper.SetConfigFile("ENV")
+	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	viper.AutomaticEnv()
 
@@ -104,7 +104,7 @@ func main() {
 		})
 	})
 
-	url := fmt.Sprintf("%s:%s", viper.Get("SERVER_URL"), viper.Get("PORT"))
+	url := fmt.Sprintf("%s:%s", viper.Get("SERVER_URL").(string), viper.Get("PORT").(string))
 
 	httpServer.Listen(url, func() {
 		fmt.Println(url)
