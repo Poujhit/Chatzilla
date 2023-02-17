@@ -101,6 +101,7 @@ func main() {
 					"users": helpers.GetUsersInRoom(user["room"]),
 				})
 			}
+			client.Disconnect(true)
 		})
 	})
 
