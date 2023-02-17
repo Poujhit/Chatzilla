@@ -105,9 +105,9 @@ func main() {
 	})
 
 	url := fmt.Sprintf("%s:%s", viper.Get("SERVER_URL"), viper.Get("PORT"))
-	fmt.Println(url)
 
 	httpServer.Listen(url, func() {
+		fmt.Println(url)
 		fmt.Printf("listening on url %s", url)
 	})
 
